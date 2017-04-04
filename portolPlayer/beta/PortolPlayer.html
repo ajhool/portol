@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>Vuescape</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="css/PortolPlayer.css">
+	<link rel="stylesheet" type="text/css" href="css/javascript.fullPage.css">
+	<script src="js/libs/jquery-1.11.2.js"></script>
+	<script src="js/portol.debug.js"></script>
+</head>
+<body>
+	<div id="landing-page">
+			<svg id="portol-logo" width="30" height="20" viewbox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<defs>
+					<linearGradient id="portol-1" x1="50%" y1="5%" x2="50%" y2="95%">
+						<!--
+						<stop offset="0%" style="stop-color:#00C488; stop-opacity:1" />
+						<stop offset="80%" style="stop-color:#008888; stop-opacity:1" />
+						-->
+						<stop offset="20%" style="stop-color:#00C488; stop-opacity:1">
+							<animate id="lava-up-1" attributeName="stop-color" values="#00C488; #576bff" dur="2s" fill="freeze" repeatCount="indefinite"/>
+							<animate id="lava-down-1" attributeName="stop-color" values="#576bff; #00C488" dur="2s" fill="freeze" repeatCount="indefinite" begin="lava-up-1.end"/>
+						</stop>
+						<stop offset="100%" style="stop-color:#576bff; stop-opacity:1">
+							<animate attributeName="stop-color" values="#576bff; #00C488" dur="1s" fill="freeze" repeatCount="indefinite" />
+						</stop>
+					</linearGradient>
+					<linearGradient id="portol-2" x1="50%" y1="5%" x2="50%" y2="95%">
+						<!--
+						<stop offset="0%" style="stop-color:#008888; stop-opacity:1" />
+						<stop offset="66%" style="stop-color:#00C488; stop-opacity:1" />
+						-->
+						<stop offset="0%" style="stop-color:#576bff; stop-opacity:1">
+							<animate attributeName="stop-color" values="#576bff; #00C488" dur="1s" fill="freeze" repeatCount="indefinite" />
+						</stop>
+						<stop offset="80%" style="stop-color:#00C488; stop-opacity:1">
+							<animate attributeName="stop-color" values="#00C488; #576bff" dur="2s" fill="freeze" repeatCount="indefinite" />
+						</stop>
+			
+					</linearGradient>
+					<pattern id="user-peep" width="100%" height="100%">
+						<image xlink:href="https://media.licdn.com/media/p/2/005/0b7/145/3bcf6ba.jpg" x="0" y="0" width="100" height="100" />
+					</pattern>
+				</defs>
+				<use xlink:href="#portol-logo-svg" x="0" y="0"/>
+			</svg>
+			<span id="temp-enter" style="position: absolute; top: 0; left: 0;">
+				<input type="text" id="adder">
+				</input>
+				<input type="submit" id="submitter">
+			</input>
+		</span>
+		<span id="test-logo">vuescap<span class="test-logo-acc">e</span></span>
+		<!--
+		<span id="test-logo-2">f<span class="test-logo-acc">u</span>llste<span class="test-logo-acc">me</span></span>
+		-->
+	</div>
+	<div id="fullpage" class="port-FP-uninitialized">
+		<svg id="shim-gradient" class="underlay" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 100 50" height="100%" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink">
+			<defs>
+				<linearGradient id="underlay-gradient" x1="0%" x2="100%" y1="0%" y2="0%">
+					<stop offset="0%" stop-color="#3F51B5" stop-opacity="0.8"/>
+					<stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.2" />
+				</linearGradient>
+			</defs>
+			<rect x="0" y="0" width="100" height="50" fill="url(#underlay-gradient)">
+			</rect>
+		</svg>	
+		<div data-anchor="playerPage" id="player-container" class="section splash-panel">
+			<span id="dark-backdrop" class="no-filter"></span>
+			<div id="quick-buy" class="is-logged-in show-during-freeview remove-for-payment hide-after-freeview info-box is-removed shy">
+				<div><span id="quick-buy-checkbox" class="buy-now-button">Quick Buy <br><span class="price-info cents"></span></span></div>
+			</div>
+			<div class="info-box remove-for-play">
+				<div class="video-title big"></div>
+				<div class="creator-name big"></div>
+				<div>Freeview: 20m (Free)</div>
+				<div>Runtime: 120m (<span class="price-info"></span>)</div>
+			</div>
+			<div id="pay-wall" class="remove-for-payment show-before-freeview is-removed show-after-freeview">
+				<div class="not-logged-in left-bar show-before-freeview show-after-freeview is-removed">
+					<div class="fill not-logged-in show-before-freeview is-removed">
+						<div>
+							<div class="video-title big"></div>
+							<div class="creator-name big"></div>
+							<div>Freeview: 20m (Free)</div>
+							<div>Runtime: 120m (<span class="price-info"></span>)</div>
+							<br>
+							<br>
+						</div>
+						<div class="stages">
+							<div class="stage-wrapper">
+								<div class="facade center-wrapper is-removed">
+								1
+								</div>
+								<div id="stage-0" class="stage">
+									<div class="stage-0">This stream is powered by ViewScape. You'll need a ViewScape account to watch the whole thing, but the first 30 minutes are free.</div>
+									<div class="right-wrapper">
+										<div id="stage-0-button" class="stage-button got-it-button">Got it</div>
+									</div>
+								</div>
+							</div>
+							<div class="stage-wrapper">
+								<div class="facade center-wrapper">
+								2
+								</div>
+								<div id="stage-1" class="stage is-removed">
+									<div>If you love film, download ViewScape's android/iOS app, you'll get exclusive behind the scenes content, tons of discounts, and it works like a remote control for ViewScape videos everywhere.</div>
+									<div class="right-wrapper">
+										<div id="stage-1-button" class="stage-button got-it-button">Got it</div>
+									</div>
+								</div>
+							</div>
+							<div class="stage-wrapper">
+								<div class="facade center-wrapper">
+								3
+								</div>
+								<div id="stage-2" class="stage is-removed">
+									<div>Last thing, when you download the VueScape app, type in the pairing code </div>
+									<div class="right-wrapper">
+										<div id="stage-2-button" class="stage-button got-it-button">Got it</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="left-bar show-after-freeview is-removed">
+					<div class="fill is-removed show-after-freeview">
+						<div>
+							<div class="video-title big"></div>
+							<div class="creator-name big"></div>
+							<div>Freeview: 20m (Free)</div>
+							<div>Runtime: 120m (<span class="price-info"></span>)</div>
+						</div>
+						<div class="preview-message remove-for-payment show-after-freeview remove-for-play is-removed">
+							<!--<h1 class="not-logged-in">Love it? Keep going.</h1>-->
+							<h3 class="not-logged-in">Sign up for access to thousands of great movies, tv shows, and live streams. Start your free trial right here.</h3>
+							<div class="center-wrapper">
+								<div class="iframe-sign-up attention-blue not-logged-in">
+									<div>Secure Sign Up</div>
+									<br>
+									<div class="social-sprite-wrapper"><img class="social-sprite" src="img/social-signup.png"/></div>
+								</div>
+							</div>
+							<div class="center-wrapper">
+								<div id="pay-after-freeview" class="buy-now-button attention-blue is-logged-in">Buy Now: <span class="price-info cents"></span></div>
+								<div class="resume-or-restart is-removed">
+									<div class="attention-blue">Resume</div>
+									<div class="attention-blue">Restart from beginning</div>
+								</div>
+							</div>
+						</div>
+						<div class="low-message"><a href="PortolPlayer.html">Try something else?</a></div>
+					</div>
+				</div>
+			</div>
+		
+			<div id="player-options-container" class="remove-for-play">
+				<div id="preview-message">
+					<img id="main-play-button" src="img/play-white.png"/>
+					<span class="label">preview</span>
+				</div>
+				<div id="player-option-buy" class="buy-now-button player-option-button">
+					<span>Buy </span>
+					<span class="price-info"></span>
+				</div>
+			</div>
+			<video id="pdash-player" autoplay="true" controls="true"/>
+		</div> 
+		<div data-anchor="videoInfoPage" id="video-info-panel" class="section splash-panel">
+			<!--
+				<svg id="shim-gradient" class="underlay" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 100 50" height="100%" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<defs>
+					<linearGradient id="underlay-gradient" x1="0%" x2="100%" y1="0%" y2="0%">
+						<stop offset="0%" stop-color="#3F51B5" stop-opacity="0.8"/>
+						<stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.2" />
+					</linearGradient>
+				</defs>
+				<rect x="0" y="0" width="100" height="50" fill="url(#underlay-gradient)">
+				</rect>
+				</svg>	
+			-->
+			<div id="video-col-1">
+				<div id="video-title">
+					(Static) Neither Should You
+				</div>
+				<br>
+				<div id="video-creator">
+				</div>
+				<div id="video-description">
+					(STATIC) Early 2012, we started a journey to Argentina, Chile, Bolivia, Uruguay, Paraguay and Southern Brazil in our old and rusty Landrover. Once again, we brought our DSLR cameras and some gear to capture every great moment of this trip. Lots of winds, emptiness, pampas, bustling cities, animals, deserts and waterfalls - all wrapped up in just under 6 min. Enjoy the ride!
+				</div>
+				<br>
+				<div id="price-scroll">
+				</div>
+				<br>
+				<div id="video-rating"></div>
+				<br>
+				<div>
+					<span style="display:none" id="channel-information">
+						<span id="channel-name">
+							(STATIC) Great Channel Name
+						</span>
+						<span id="channel-description">
+							(STATIC) this is an interesting channel. Channel description test.
+						</span>
+					</span>
+				</div>
+			</div>
+			<span id="video-discoverer">
+					(STATIC) Discovered by <a>Aidan</a>
+			</span>
+		</div>
+		<div data-anchor="pairingPage" id="pairing-panel" class="section splash-panel">
+			<span id="pairing-procedure">
+				<span class="main-content not-logged-in">
+					<p>1. Download Portol app on iOS/Android</p>
+					<p>2. Enter the code in <span class="pair-pink">pink</span>.</p>
+					<p>3. Press play.</p>
+				</span>
+				<span class="is-logged-in">
+					What is this?
+				</span>
+			</span>
+			<div class="center-wrapper">
+				<img id="qrcode-img"/>
+				<br>
+				<span id="text-pair-code" class="pairing-code pair-pink"></span>
+			</div>
+		</div>
+		<div data-anchor="accountPage" id="account-panel" class="section splash-panel">
+			<div id="user-information">
+				<span id="logged-in" class="is-logged-in">
+					<span id="user-name" class="user-name">
+					</span>
+					<br>
+					<img id="user-pic"/>
+					<br>
+					<span id="user-balance">
+					</span>
+				</span>
+				<span id="login-options-container" class="not-logged-in">
+					<div class="iframe-sign-up attention-blue not-logged-in">
+						<div>Secure Sign Up</div>
+						<br>
+						<div class="social-sprite-wrapper"><img class="social-sprite" src="img/social-signup.png"/></div>
+					</div>
+				</span>
+			</div>
+		</div>
+		<div data-anchor="portolPage" id="portol-panel" class="section splash-panel">
+		</div>
+		<div id="control-bar" class="port-FP-uninitialized">
+			<span id=drawer-controller>
+				<span id="drawer-button">
+					<span>.</span>
+					<br>
+					<span>.</span>
+					<br>
+					<span>.</span>
+					<br>
+					<span>.</span>
+					<br>
+				</span>
+			</span>
+			<span id="control-buttons">
+				<div data-menuanchor="watchPage" id="watch-button" class="active splash-button normal">
+					<span id="watch-button-icon" class="golden-split small normal">
+						<img id="watch-button-icon-image" class="control-icon normal" src="img/play-white.png"/>
+						<div class="control-tooltip right">
+							<div>Watch</div>
+							<div class="video-title"></div>
+						</div>
+					</span>
+					<span id="watch-button-main" class="golden-split big">
+						<span class="splash-button-label">
+							Watch
+						</span>
+					</span>
+				</div>
+				<div data-menuanchor="videoInfoPage" id="video-info-button" class="splash-button normal">
+					<span id="video-info-button-icon" class="golden-split small normal">
+						<img id="video-info-button-icon-image" class="control-icon normal" src="img/more-info.png"/>
+						<div class="control-tooltip right">
+							<div>About</div>
+							<div class="video-title"></div>
+						</div>
+					</span>
+					<span id="video-info-button-main" class="golden-split big">
+						<span class="splash-button-label">
+							About
+						</span>
+					</span>
+				</div>
+				<div data-menuanchor="pairingPage" id="pairing-button" class="splash-button normal">
+					<span id="pairing-button-icon" class="golden-split small normal">
+						<img id="pairing-button-icon-image" class="control-icon normal" src="img/devices.png"/>
+						<div class="control-tooltip right">
+							<div>Pairing</div>
+							<div class="pairing-code">
+							</div>
+						</div>
+					</span>
+					<span id="pairing-button-main" class="golden-split big">
+						<span class="splash-button-label">
+							<span>Pairing</span>
+						</span>
+					</span>
+				</div>
+				<div data-menuanchor="accountPage" id="account-button" class="splash-button normal">
+					<span id="account-button-icon" class="golden-split small normal">
+						<img id="account-button-icon-image" class="control-icon normal" src="img/user-1.png">
+						<div class="control-tooltip right">
+							<div>Account</div>
+							<div class="user-name">
+							</div>
+						</div>
+					</span>
+					<span id="account-button-main" class="golden-split big">
+						<span id="account-button-label" class="splash-button-label">
+							Account
+						</span>
+					</span>
+				</div>
+			</span>
+		</div>
+	</div>
+	<!--<script src="js/libs/javascript.fullPage.min.js"></script>-->
+	<script src="js/libs/jquery.fullPage.js"></script>
+	<script>
+	/*
+		var myPlayer = portol.registerPlayer(
+		{"element": document.body,
+			"apiKey": "blogger1Id",
+			//"videoKey": "RT_live_lowqual",
+			"videoKey": "RedBullPlayStreets",
+			"referrerId": 123456789
+		});
+	*/
+	var vs_embed_uri = document.URL;
+	var split_uri = vs_embed_uri.split('embedCode=');
+	var vs_embed_code = null;
+	if(split_uri.length == 2){
+		vs_embed_code = split_uri[1];
+	}
+
+	var makeCall = function(vidId){
+						var DEFAULT_VID = 'mclintock_1963'
+						var myPlayer = portol.registerPlayer({"element": document.body,
+									"apiKey": "blogger1Id",
+									//"videoKey": "RT_live_lowqual",
+									"videoKey": vidId || DEFAULT_VID,
+									"referrerId": 123456789 });
+					};
+					
+	if(!(null == vs_embed_code)){
+		makeCall(vs_embed_code);
+	} else {
+		var a = document.getElementById('submitter');
+		a.addEventListener('click', function(){
+			var injectedId = document.getElementById("adder").value;
+			makeCall(injectedId);
+		});
+	}
+	</script>
+</body>
+</html>

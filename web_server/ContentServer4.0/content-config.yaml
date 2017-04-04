@@ -1,0 +1,57 @@
+contentDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED
+
+#database containing content metadata
+metadataDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED
+  
+dataDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED
+
+#used for connecting to master BTC address server
+jerseyClient:
+  timeout: 1000ms
+  connectionTimeout: 1000ms
+  minThreads: 1
+  maxThreads: 128
+  workQueueSize: 8
+  gzipEnabled: false
+  gzipEnabledForRequests: false
+  chunkedEncodingEnabled: false
+
+server:
+  type: simple
+  applicationContextPath: /
+  adminContextPath: /admin
+  connector:
+    type: http
+    port: REDACTED
+
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+
+  # Logger-specific levels.
+  loggers:
+
+    # Sets the level for 'com.apmasphere.billproto' to DEBUG.
+    com.apmasphere.billproto: DEBUG
+
+    org.hibernate.SQL: ALL
+
+  appenders:
+    - type: console

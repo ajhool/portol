@@ -1,0 +1,41 @@
+server:
+  gzip:
+      enabled: false
+  applicationContextPath: /
+  applicationConnectors:
+    - type: http
+      bindHost: 127.0.0.1 # only bind to loopback
+      port: 10004
+    - type: https
+      port: 10003
+      keyStorePath: REDACTED
+      keyStorePassword: REDACTED
+      validateCerts: false
+
+      
+
+  adminContextPath: /admin
+  adminConnectors:
+    - type: http
+      bindHost: 127.0.0.1 # only bind to loopback
+      port: 10005
+
+EdgeEndpoint:
+  serverTTLseconds: 120
+  
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: ALL
+
+  # Logger-specific levels.
+  loggers:
+
+    # Sets the level for 'com.apmasphere.billproto' to DEBUG.
+    com.apmasphere.billproto: DEBUG
+
+    org.hibernate.SQL: ALL
+
+  appenders:
+    - type: console

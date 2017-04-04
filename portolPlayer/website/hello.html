@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>FullScreen Backgrounds - fullPage.js</title>
+	<meta name="author" content="AA Labs" />
+	<meta name="description" content="fullPage full-screen apple iphone 5c similar website. Reproducing one sigle scrolling site like Apple iPhone." />
+	<meta name="keywords"  content="fullpage,jquery,demo,screen,fullscreen,apple,iphone5c,iphone5s,iphone,iphone-5c,like,reproduce,similar,how to" />
+	<meta name="Resource-type" content="Document" />
+
+	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300' rel='stylesheet' type='text/css'>
+	
+	<link rel="stylesheet" type="text/css" href="js/jquery.fullPage.css" />
+	<link rel="stylesheet" type="text/css" href="css/PortolMain.css"/>
+	<!--[if IE]>
+		<script type="text/javascript">
+			 var console = { log: function() {} };
+		</script>
+	<![endif]-->
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
+	<script type="text/javascript" src="js/libs/jquery.fullPage.min.js"></script>
+	<script type="text/javascript" src="examples.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#fullpage').fullpage({
+				'verticalCentered': false,
+				'css3': true,
+				'sectionsColor': [false, '#7986CB', '#11aa11', '#F44336'],
+				'navigation': true,
+				'navigationPosition': 'right',
+				'navigationTooltips': ['fullPage.js', 'Powerful', 'Amazing', 'Simple'],
+
+				afterLoad: function(anchorLink, index){
+					if(index == 2){
+						$('#iphone3, #iphone2, #iphone4').addClass('active');
+					}
+					$('#infoMenu').toggleClass('whiteLinks', index ==4);
+				},
+
+				onLeave: function(index, newIndex, direction){
+					if (index == 3 && direction == 'down'){
+						$('.section').eq(index -1).removeClass('moveDown').addClass('moveUp');
+					}
+					else if(index == 3 && direction == 'up'){
+						$('.section').eq(index -1).removeClass('moveUp').addClass('moveDown');
+					}
+
+					$('#staticImg').toggleClass('active', (index == 2 && direction == 'down' ) || (index == 4 && direction == 'up'));
+					$('#staticImg').toggleClass('moveDown', newIndex == 4);
+ 					$('#staticImg').toggleClass('moveUp', index == 4 && direction == 'up');
+				},
+
+				/*
+				Needed to maintain the fixed position of the element
+				due to problems using translate3d and fixed elements.
+				*/
+				afterRender: function(){
+					$('#infoMenu').appendTo('body');
+
+					$('#githubLink, .twitter-share-button').appendTo('body');
+				}
+
+			});
+		});
+	</script>
+	
+	
+
+</head>
+<body>
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<div id="fullpage">
+	<div class="section " id="section0" style="background-image: url(http://i.imgur.com/lCJOqD5.jpg);">
+		<!--
+		<h1>fullstea<span style="color: pink">m</span></h1>
+		-->
+		<h1>meteora</h1>
+		<h3>Browse literally tens of the world's least copyrighted movies and tv shows. We're beta testing right now.</h3>
+		<div class="action-button-wrap">
+			<div id="login-button" class="action-button">Login</div>
+			<a id="creator-button" class="action-button" href="creators.html">I'm a creator</a>
+		</div>
+		
+		<!--
+		<img src="https://raw.githubusercontent.com/alvarotrigo/fullPage.js/master/examples/imgs/iphone1.jpg" alt="iphone" />
+		-->
+		<div class="wrap">
+			<div class="box">
+				<input class="account-field" type="text" placeholder="Email"></input>
+				<input class="account-field" type="password" placeholder="Password"></input>
+				<input class="account-field" type="text" placeholder="Username"></input>
+				<input class="account-field" type="submit" value="Sign up"></input>
+			</div>
+		</div>
+	</div>
+	<div class="section" id="section1">
+		<div class="wrap">
+		<!--
+			<div class="imgsContainer">
+				<img src="https://raw.githubusercontent.com/alvarotrigo/fullPage.js/master/examples/imgs/iphone2.png" alt="iphone" id="iphone2" />
+				<img src="https://raw.githubusercontent.com/alvarotrigo/fullPage.js/master/examples/imgs/iphone3.png" alt="iphone" id="iphone3" />
+				<img src="https://raw.githubusercontent.com/alvarotrigo/fullPage.js/master/examples/imgs/iphone4.png" alt="iphone" id="iphone4" />
+			</div>
+		-->
+		</div>
+	</div>
+
+	<div class="section moveDown" id="section2">
+		<div class="wrap">
+			<div class="imgsContainer">
+				<img src="https://raw.githubusercontent.com/alvarotrigo/fullPage.js/master/examples/imgs/iphone-yellow.png" alt="iphone" id="iphone-yellow" />
+				<img src="https://raw.githubusercontent.com/alvarotrigo/fullPage.js/master/examples/imgs/iphone-red.png" alt="iphone" id="iphone-red" />
+				<img src="https://raw.githubusercontent.com/alvarotrigo/fullPage.js/master/examples/imgs/iphone-blue.png" alt="iphone" id="iphone-blue" />
+			</div>
+
+			<div class="box">
+				<h2>Amazing stuff</h2>
+				Combining <strong>fullPage.js</strong> with your own CSS styles and animations, you will be able to create something remarkable.
+			</div>
+		</div>
+	</div>
+	<div class="section moveDown" id="section3">
+		<div class="wrap">
+			<div class="box">
+				<iframe width="750px" height="480px" src="http://159.203.91.129/player/beta/PortolPlayer.html" frameborder="0" scrolling="no" allowfullscreen=""></iframe>				
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var input = document.getElementById('video-upload');
+	input.addEventListener( 'change', function( e )
+		{
+			var fileName = '';
+			if( this.files && this.files.length > 1 )
+				fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+			else
+				fileName = e.target.value.split( '\\' ).pop();
+
+			if( fileName )
+				label.querySelector( 'span' ).innerHTML = fileName;
+			else
+				label.innerHTML = labelVal;
+		});
+
+		// Firefox bug fix
+		input.addEventListener( 'focus', function(){ input.classList.add( 'has-focus' ); });
+		input.addEventListener( 'blur', function(){ input.classList.remove( 'has-focus' ); });
+</script>
+
+</body>
+</html>

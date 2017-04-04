@@ -1,0 +1,270 @@
+<html><head>
+<meta charset="UTF-8">
+
+<title>Portol Web</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<script src="/js/jquery-1.11.2.js"></script>
+<script src="/js/portol.debug.js"></script>
+<link rel="stylesheet" type="text/css" href="PortolPlayer.css">
+</head>
+<body>
+	<div id="portol-player">
+		<div id="landing-page">
+			<svg id="portol-logo" width="30" height="20" viewbox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<defs>
+					<linearGradient id="portol-1" x1="50%" y1="5%" x2="50%" y2="95%">
+						<!--
+						<stop offset="0%" style="stop-color:#00C488; stop-opacity:1" />
+						<stop offset="80%" style="stop-color:#008888; stop-opacity:1" />
+						-->
+						<stop offset="20%" style="stop-color:#00C488; stop-opacity:1">
+          					<animate id="lava-up-1" attributeName="stop-color" values="#00C488; #576bff" dur="2s" fill="freeze" repeatCount="indefinite"/>
+          					<animate id="lava-down-1" attributeName="stop-color" values="#576bff; #00C488" dur="2s" fill="freeze" repeatCount="indefinite" begin="lava-up-1.end"/>
+						</stop>
+						<stop offset="100%" style="stop-color:#576bff; stop-opacity:1">
+							<animate attributeName="stop-color" values="#576bff; #00C488" dur="1s" fill="freeze" repeatCount="indefinite" />
+						</stop>
+					</linearGradient>
+					<linearGradient id="portol-2" x1="50%" y1="5%" x2="50%" y2="95%">
+						<!--
+						<stop offset="0%" style="stop-color:#008888; stop-opacity:1" />
+						<stop offset="66%" style="stop-color:#00C488; stop-opacity:1" />
+						-->
+						<stop offset="0%" style="stop-color:#576bff; stop-opacity:1">
+							<animate attributeName="stop-color" values="#576bff; #00C488" dur="1s" fill="freeze" repeatCount="indefinite" />
+						</stop>
+						<stop offset="80%" style="stop-color:#00C488; stop-opacity:1">
+						    <animate attributeName="stop-color" values="#00C488; #576bff" dur="2s" fill="freeze" repeatCount="indefinite" />
+						</stop>
+						
+					</linearGradient>
+					<pattern id="user-peep" width="100%" height="100%">
+						<image xlink:href="https://media.licdn.com/media/p/2/005/0b7/145/3bcf6ba.jpg" x="0" y="0" width="100" height="100" />
+					</pattern>
+				</defs>
+				<use xlink:href="#portol-logo-svg" x="0" y="0"/>
+			</svg>
+		</div>
+		<div id="screen-container">
+			<!--
+			<video id="preview-player" autoplay="true" controls="true" style="display:inline-block; position:relative; top:0; left:0; width:100%; height:100%; z-index: 100;"/>
+			-->
+			<div id="panels-container">
+				<div id="player-container" class="splash-panel">
+					<span id="player-options-container">
+						<span id="player-option-buy" class="player-option-button">Buy</span>
+						<br>
+						<span id="player-option-preview" class="player-option-button">Preview</span>
+					</span>
+					<video id="pdash-player" autoplay="true" controls="true"/>
+				</div>
+				<svg id="shim-gradient" class="underlay" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 100 50" height="100%" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<defs>
+						<linearGradient id="underlay-gradient" x1="0%" x2="100%" y1="0%" y2="0%">
+							<stop offset="0%" stop-color="#3F51B5" stop-opacity="0.8"/>
+							<stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.2" />
+						</linearGradient>
+					</defs>
+					<rect x="0" y="0" width="100" height="50" fill="url(#underlay-gradient)">
+					</rect>
+				</svg>
+				<div id="video-info-panel" class="splash-panel">
+					<div id="video-col-1">
+						<div id="video-title">
+							(Static) Neither Should You
+						</div>
+						<br>
+						<div id="video-creator">
+							(STATIC) Alexia O'brien
+						</div>
+						<div id="video-description">
+							(STATIC) Early 2012, we started a journey to Argentina, Chile, Bolivia, Uruguay, Paraguay and Southern Brazil in our old and rusty Landrover. Once again, we brought our DSLR cameras and some gear to capture every great moment of this trip. Lots of winds, emptiness, pampas, bustling cities, animals, deserts and waterfalls - all wrapped up in just under 6 min. Enjoy the ride!
+						</div>
+						<br>
+						<div id="price-scroll">
+							$2.50
+						</div>
+						<br>
+						<div id="video-rating"></div>
+						<br>
+						<div>
+							<span style="display:none" id="channel-information">
+								<span id="channel-name">
+									(STATIC) Great Channel Name
+								</span>
+								<span id="channel-description">
+									(STATIC) this is an interesting channel. Channel description test.
+								</span>
+							</span>
+						</div>
+					</div>
+					<span id="video-discoverer">
+							(STATIC) Discovered by <a>Aidan</a>
+					</span>
+				</div>
+				<div id="pairing-panel" class="splash-panel">
+					<div id="pairing-methods">
+						<img id="qrcode-img"/>
+						<br>
+						<span id="text-pair-code">eBG7!</span>
+						<br>
+						<div id="account-pair"></div>
+					</div>
+				</div>
+				<div id="account-panel" class="splash-panel">
+					<div id="user-information">
+						<span id="user-name">
+							(STATIC) Aidan
+						</span>
+						<br>
+						<img id="user-pic" src="https://media.licdn.com/media/p/2/005/0b7/145/3bcf6ba.jpg"/>
+						<br>
+						<span id="user-balance">
+							(STATIC) $65.00
+						</span>
+					</div>
+					<div id="login-information">
+						<button id="login-button">
+							Login
+						</button>
+					</div>
+				</div>
+				<div id="portol-panel" class="splash-panel">
+					<div id="portol-link">
+						<a href="http://portol.me">Find out more.</a>
+					</div>
+				</div>			
+			</div>	
+			<div id="control-bar" class="opened-drawer">
+				<div id="drawer-button" class="splash-button normal">
+					<span id="drawer-button-icon" class="golden-split golden-split-small">
+						<img id="drawer-button-icon-image" class="control-icon normal" src="http://apk-dl.com/detail/image/com.kimcy92.navigationbar-w250.png"/>
+					</span>
+					<span id="drawer-button-main" class="golden-split golden-split-big">
+						<span class="splash-button-label">
+							Drawer
+						</span>
+					</span>
+				</div>
+				<div id="watch-button" class="splash-button normal">
+					<span>
+						<span id="watch-button-icon" class="golden-split golden-split-small">
+							<img id="watch-button-icon-image" class="control-icon normal" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSQ_tR27jZekrV3budN0VE9BOz9L6dxxn3e8z_dfNuGB61oagxrj-wnjQ"/>
+						</span>
+						<span id="watch-button-main" class="golden-split golden-split-big">
+							<span class="splash-button-label">
+								Watch
+							</span>
+						</span>
+					</span>
+				</div>
+				<div id="video-info-button" class="splash-button normal">
+					<span>
+						<span id="video-info-button-icon" class="golden-split golden-split-small">
+							<img id="video-info-button-icon-image" class="control-icon normal" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSQ_tR27jZekrV3budN0VE9BOz9L6dxxn3e8z_dfNuGB61oagxrj-wnjQ"/>
+						</span>
+						<span id="video-info-button-main" class="golden-split golden-split-big">
+							<span class="splash-button-label">
+								About
+							</span>
+						</span>
+					</span>
+				</div>
+				<div id="pairing-button" class="splash-button normal">
+					<span>
+						<span id="pairing-button-icon" class="golden-split golden-split-small">
+							<span id="pairing-button-icon-image" class="control-icon normal">
+							</span>
+						</span>
+						<span id="pairing-button-main" class="golden-split golden-split-big">
+							<span class="splash-button-label">
+								Pairing
+							</span>
+						</span>
+					</span>
+				</div>
+				<div id="account-button" class="splash-button normal">
+					<span>
+						<span id="account-button-icon" class="golden-split golden-split-small">
+							<img id="account-button-icon-image" class="control-icon normal" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSQ_tR27jZekrV3budN0VE9BOz9L6dxxn3e8z_dfNuGB61oagxrj-wnjQ"/>
+						</span>
+						<span id="account-button-main" class="golden-split golden-split-big">
+							<span class="splash-button-label">
+								Account
+							</span>
+						</span>
+					</span>
+				</div>
+				<div id="portol-button" class="splash-button normal">
+					<svg width="30" height="20" viewbox="0 0 30 20" id="portol-logo-button" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+						<defs>
+							<linearGradient id="portol-1" x1="50%" y1="5%" x2="50%" y2="95%">
+								<stop offset="0%" style="stop-color:#00C488; stop-opacity:1" />
+								<stop offset="80%" style="stop-color:#008888; stop-opacity:1" />
+							</linearGradient>
+							<linearGradient id="portol-2" x1="50%" y1="5%" x2="50%" y2="95%">
+								<stop offset="0%" style="stop-color:#008888; stop-opacity:1" />
+								<stop offset="66%" style="stop-color:#00C488; stop-opacity:1" />
+							</linearGradient>
+							<pattern id="user-peep" width="100%" height="100%">
+								<image xlink:href="https://media.licdn.com/media/p/2/005/0b7/145/3bcf6ba.jpg" x="0" y="0" width="100" height="100" />
+							</pattern>
+						</defs>
+						<use xlink:href="#portol-logo-svg" x="0" y="0"/>
+					</svg>
+				</div>
+		</div>
+		</div>
+		<br>
+<!-- TODO: ajh -->	
+				
+		<svg xmlns="http://www.w3.org/2000/svg" style="display: none;" xmlns:xlink="http://www.w3.org/1999/xlink">
+			<symbol id="portol-logo-svg" viewBox="0 0 336 200" preserveAspectRatio="xMidYMid meet">
+				<g>
+					<path d="M8 136 v-70 h18 q9,1 10,10 v24 q-1,9 -10,10 h-10 v26 h-8 M17 103 v-30 h6 q4,0 4,4 v22 q0,4 -4,4 h-6" stroke="black" stroke-width="1" fill="white" fill-rule="evenodd" stroke-linecap="butt"/>
+				</g>
+				<g>
+					<!--
+					<path d="M139 101 v-28 h7 q4,0 4,4 v20 q0,4 -4,4 h-7" stroke="black" stroke-width="1" fill="black" stroke-line-cap="butt"/>
+					<path d="M131 136 v-70 h18 q9,1 10,10 v24 q-1,7 -7,7 l7 29 h-7 l-7 -29 h-6 v29 h-8" stroke="black" stroke-width="1" fill="white" fill-rule="evenodd" stroke-linecap="butt"/>
+					-->
+					<path d="M131 136 v-70 h18 q9,1 10,10 v24 q-1,7 -7,7 l7 29 h-7 l-7 -29 h-6 v29 h-8 M139 101 v-28 h7 q4,0 4,4 v20 q0,4 -4,4 h-7" stroke="black" stroke-width="1" fill="white" fill-rule="evenodd" stroke-linecap="butt"/>	
+				</g>
+				<g>
+					<path d="M196 136 v-63 h-10 v-7 h28 v7 h-10 v63 h-8" stroke="black" stroke-width="1" fill="white" stroke-linecap="butt"/>
+				</g>
+				<g>
+					<path d="M308 136 v-71 h8 v64 h13 v7 h-21" stroke="black" stroke-width="1" fill="white" stroke-linecap="butt"/>
+				</g>
+				<g>
+				<!--
+					<ellipse cx="77" cy="98" rx="29" ry="52" stroke-width="4" stroke="white" fill="none"/>
+				-->
+					<ellipse cx="77" cy="98" rx="25" ry="48" stroke-width="2" stroke="white" fill="url(#portol-1)"/>
+				</g>
+				<g>
+				<!--
+					<ellipse cx="259" cy="98" rx="29" ry="52" stroke-width="4" stroke="white" fill='none'/>
+					-->
+					<ellipse cx="259" cy="98" rx="25" ry="48" stroke-width="2" stroke="white" fill="url(#portol-2)"/>
+					<!--
+					<ellipse cx="259" cy="98" rx="25" ry="48" stroke-width="2" stroke="white" fill="url(#user-peep)"/>
+					-->
+				</g>
+			</symbol>
+		</svg>
+	</div>
+	<script>
+		var myPlayer = portol.registerPlayer(
+		{"element": document.body,
+			"apiKey": "blogger1Id",
+			//"videoKey": "RT_live_lowqual",
+			"videoKey": "RedBullPlayStreets",
+			"referrerId": 123456789
+		});
+	</script>
+</body>
+</html>

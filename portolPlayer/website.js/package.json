@@ -1,0 +1,15 @@
+{
+  "name": "portoljs",
+  "version": "0.0.1",
+  "description": "An API for embedding Portol players.",
+  "main": "dist/portol.all.js",
+  "scripts": {
+    "test": "cd build && npm install && grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ameijer/portol.git"
+  },
+  "author": "Aidan Hoolachan",
+  "license": "BSD"
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Demo Player</title>
+
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script src="js/jquery-1.11.2.js"></script>
+<script src="js/portol.debug.js"></script>
+<script src="js/dash.debug.js"></script>
+
+</head>
+<body>
+<div id="myPlayer" style="width:800px; height: 500px; display: inline-block; position: relative;"></div>
+<br>
+  <script>
+     (function(){
+      var url = "http://dash.edgesuite.net/akamai/test/caption_test/ElephantsDream/elephants_dream_480p_heaac5_1.mpd";
+       var context = new Dash.di.DashContext();
+       var player = new MediaPlayer(context);
+       player.startup();
+       player.attachView(document.querySelector("#myPlayer"));
+       player.attachSource(url);
+      })();
+  </script>
+</body>
+</html>

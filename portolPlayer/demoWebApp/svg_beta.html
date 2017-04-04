@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SVG Sandbox</title>
+<script src="/js/snap.svg.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/main.css" />
+
+</head>
+<body>
+<button id="left">Left</button>
+<button id="middle">Center</button>
+<button id="right">Right</button>
+<br>
+<button id="leftProt">LeftP</button>
+<button id="middleProt">CenterP</button>
+<button id="rightProt">RightP</button>
+<br>
+
+<script>
+
+var portol_svgns = "http://www.w3.org/2000/svg";
+var portol_xlinkns = "http://www.w3.org/1999/xlink";
+var ns_native = null;
+
+var glob;
+
+
+var templates = new BtCContainer();
+
+/*
+<svg xmlns="http://www.w3.org/2000/svg" id='tv'>
+    <circle preserveAspectRatio="midXmidY meet" cx="30" cy="30" r="30" fill="#FFFFFF"/>
+    <rect x="10" y="21" rx="5" width="40" height="26" style="fill:rgb(0,255,0);stroke-width:1;stroke:rgb(0,0,0)"/>	
+ 	<line x1="19.4" y1="10.4" x2="30" y2="21" style="stroke:#00FFFF;stroke-width:2"/>
+ 	<line x1="41.6" y1="10.4" x2="30" y2="21" style="stroke:#0000FF;stroke-width:2"/>
+ 	<!--<path d="m 30 45 v -11" stroke="#0000FF" stroke-width="8"/>;-->
+ 	<rect x="26" y="33" width="8" height="12" fill="#0000FF" rx="2"/>
+ 	<circle cx="30" cy="28" r="4" fill="#0000FF"/>
+</svg>
+*/
+
+function __pad(){
+	document.body.appendChild(document.createElement('br'));
+}
+
+var slider = new PriceScroll(130, 80);
+
+var centerPbutton = document.getElementById('middleProt');
+centerPbutton.onclick = function(){slider.javascriptMove();};
+
+__pad();
+var signal = new SignalSymbol();
+document.body.appendChild(signal.symbol);
+//__pad();
+var account = new AccountSymbol();
+document.body.appendChild(account.symbol);
+
+var tv = new InfoSymbol();
+document.body.appendChild(tv.symbol);
+
+</script>
+</body>
+</html>

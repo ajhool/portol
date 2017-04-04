@@ -1,0 +1,231 @@
+$primaryColor: #eeffcc;
+$portolToIframe: 100%;
+$pFrameToPortol: 100%;
+//$mainFont: Open Sans, Lucida Grande, Tahoma, Verdana, sans-serif;
+$mainFont: 'Ubuntu', sans-serif;
+
+$seaGreen: #00C488;
+$attentionBlue: #5C6BC0;
+
+@mixin roboto-font(){
+	font-family: 'Roboto', sans-serif;
+}
+
+/*$otherFont:
+font-family: 'Open Sans', Helvetica, 'Microsoft YaHei New', 'Microsoft Yahei', 微软雅黑, 宋体, SimSun, STXihei, 华文细黑, sans-serif;
+font-size: 48px;
+font-stretch: normal;
+font-style: normal;
+font-variant: normal;
+font-weight: 800;
+*/
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin easy-transition($time){
+ 	-webkit-transition: width $time ease, height $time ease, left $time ease, right $time ease;
+	-moz-transition: width $time ease, height $time ease, left $time ease, right $time ease;
+ 	-o-transition: width $time ease, height $time ease, left $time ease, right $time ease;
+ 	transition: width $time ease, height $time ease, left $time ease, right $time ease;
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+    font-family: $mainFont;
+}
+
+body {
+	overflow-x: hidden;
+	overflow-y: hidden;
+	text-align: center;
+	
+	background: #0A0A0A url('../img/theater.jpg') no-repeat fixed center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+h1 {
+	color: $attentionBlue;
+}
+
+.main-container {
+	display: inline-block;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	padding: 2% 2% 2% 2%;
+	background-color: rgba(200,200,200,.8);
+	text-align:center;
+	
+	-webkit-box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
+ 	-moz-box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
+ 	box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
+ 	
+ 	@include border-radius(10px);
+	
+	& .social {
+		@include roboto-font();
+		display: inline-block;
+		text-align: center;
+		padding-left: 5px;
+		padding-right: 5px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		
+		& .social-btn-wrapper {
+			margin-top: 5px;
+			margin-bottom: 5px;
+		}
+	}
+	
+	& .normal-vuescape {
+		display: inline-block;
+		
+		padding-top: 10px;
+		padding-bottom: 10px;
+		padding-left: 5px;
+		padding-right: 5px;		
+		& input{
+			display: inline-block;
+			width: 100%;
+			font-size: 1.2em;
+			padding: 3px 3px 3px 3px;
+		}
+	}
+	
+	& .switcher {
+		display: inline-block;
+		color: white;
+		border-bottom: 2px solid $seaGreen;
+		cursor: pointer;
+		width: auto;
+		&:hover {
+			-webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.2);
+ 			-moz-box-shadow: 00px 0px 5px 1px rgba(0,0,0,0.2);
+ 			box-shadow: 00px 0px 5px 1px rgba(0,0,0,0.2);
+		}
+	}
+	
+	& .action-button {
+		background-color: $seaGreen;
+		cursor: pointer;
+		
+		display: inline-block;
+		width: 100%;
+		font-size: 1.2em;
+		padding: 3px 3px 3px 3px;
+		color: white;
+	}
+}
+
+.is-removed {
+	display: none !important;
+	opacity: 0;
+}
+
+/***************************
+ ----- or ------
+ ***************************/
+ .or-divider-wrapper {
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+	
+	color: rgb(70,70,70);
+	
+	 & .or-divider {
+		 display: inline-block;
+		 width: 30%;
+		 border-bottom: 2px solid rgb(120,120,120);
+		 margin: .25em 5% .25em 5%;
+	 }
+ }
+/****************************
+ * Google Custom Login Button
+ ****************************/
+#google-login-button {
+      display: inline-block;
+      background: #4285f4;
+      color: white;
+      width: 190px;
+      border-radius: 5px;
+      white-space: nowrap;
+	&:hover {
+		cursor: pointer;
+	}
+		
+}
+    span.label {
+      font-weight: bold;
+    }
+    span.icon {
+      background: url('/identity/sign-in/g-normal.png') transparent 5px 50% no-repeat;
+      display: inline-block;
+      vertical-align: middle;
+      width: 42px;
+      height: 42px;
+      border-right: #2265d4 1px solid;
+    }
+    span.buttonText {
+      display: inline-block;
+      vertical-align: middle;
+      padding-left: 42px;
+      padding-right: 42px;
+      font-size: 14px;
+      font-weight: bold;
+      /* Use the Roboto font that is loaded in the <head> */
+      font-family: 'Roboto', sans-serif;
+    }
+
+//medium+ screen sizes
+@media (min-width:992px) {
+    .desktop-only {
+        //display:block !important;
+    }
+}
+ 
+//small screen sizes
+@media (max-width: 991px) {
+    .mobile-only {
+        //display:block !important;
+    }
+ 
+    .desktop-only {
+        display:none !important;
+    }
+}
+
+/** 
+ * iPad with portrait orientation.
+ */
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait){
+  .foo {
+    height: 1024px;
+  }
+}
+
+/** 
+ * iPad with landscape orientation.
+ */
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:landscape){
+  .foo {
+    height: 768px;
+  }
+}
+
+/**
+ * iPhone 5
+ * You can also target devices with aspect ratio.
+ */
+@media screen and (device-aspect-ratio: 40/71) {
+  .foo {
+    height: 500px;
+  }
+}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300' rel='stylesheet' type='text/css'>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Vuescape Secure Login</title>
+<meta name="author" content="VueScape" />
+<meta name="description" content="Login or Sign Up for VueScape the world's premier video streaming marketplace." />
+<meta name="keywords"  content="Login,Signup,VueScape,ViewScape,View Scape,Vue Scape, Movies, Documentaries,tv show,free,account" />
+<meta name="Resource-type" content="Document"/>
+<meta name="google-signin-client_id" content="455723277988-mdc4rhk2nitc31slqdrhhgdlv0u6m3vk.apps.googleusercontent.com">
+
+<link rel="stylesheet" type="text/css" href="css/UserMgmt.css" />
+<script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+
+</head>
+<body>
+<script> 
+/*
+	window.googleUser = null;
+	window.googleLoad = false;
+	window.onGoogleSignIn = function(gUser){
+		window.googleUser = gUser;
+	};
+	
+	window.onVSGoogleLoad = function(){
+		console.log('OnVSGoogleLoad called from the window.');	
+	};
+	
+	var onVSGoogleLoadHook = function(){
+		window.onVSGoogleLoad();
+	};
+	
+	var onGoogleFailure = function(sEvent){
+			console.log('Google failure: ', sEvent);
+		};
+	
+	var onGoogleSignIn = function(fEvent){
+		console.log('Google success: ', fEvent);
+		window.onGoogleSignIn();
+	};
+
+	window.FBPromise = {
+		hasListener: false,
+		hasReturned: false,
+		callback: function(){
+			console.log('Premature callback. No listener. (This function will be overwritten by first listener)');
+		},
+		fire: function(){
+			window.FBPromise.hasReturned=true;
+			if(window.FBPromise.hasListener){
+				window.FBPromise.callback();
+			} else {
+				//Using the hasReturned flag to check when the VueScape javascript loads.
+				//setTimeout(function(){window.FBPromise.fire();}, 300);
+			}
+		},
+	}
+	
+  window.fbAsyncInit = function() {
+  	FB.Event.subscribe('auth.statusChange', function(response) {
+  		console.log('fb auth.statusChange', response);
+  		window.FBPromise.fire();
+	});
+	
+	FB.Event.subscribe('auth.login', function(response) {
+		console.log('fb auth.login', response);
+		window.FBPromise.fire();
+	});
+  	
+  	FB.Event.subscribe('auth.authResponseChange', function(response){
+  		console.log('fb auth.authRsponseChange', response);
+  	});
+  	
+	FB.init({
+	  appId      : '1080777671932760',
+	  xfbml      : true,
+	  cookie	 : true,
+	  status	 : true,
+	  version    : 'v2.5'
+	});
+	
+	window.FBPromise.fire();
+  };
+  
+  (function(d, s, id){
+	 var js, fjs = d.getElementsByTagName(s)[0];
+	 if (d.getElementById(id)) {return;}
+	 js = d.createElement(s); js.id = id;
+	 js.src = "//connect.facebook.net/en_US/sdk.js";
+	 fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+*/
+</script>
+<script src="js/inline/InlineAuthScript.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=onVSGoogleLoadHook" async defer></script>
+
+<div class="main-container">
+	<h1>Vuescape</h1>
+	<div id="who-am-i">Who Am I?</div>
+	<div class="social">
+		<div class="social-btn-wrapper">
+			<fb:login-button scope="public_profile,email,user_friends" size="xlarge">
+				Continue with Facebook
+			</fb:login-button>
+		</div>
+		<div class="social-btn-wrapper">
+			<div class="g-signin2" data-width="300" data-height="66" data-longtitle="true" data-onsuccess="onGoogleSignIn" data-onfailure="onGoogleFailure">
+			</div>
+		</div>
+	</div>
+	<div class="or-divider-wrapper">
+		<span class="or-divider"></span><span class="or-middle">or</span><span class="or-divider"</span>
+	</div>
+	<br>
+	<div class="normal-vuescape">
+		<input name="username" type="text" maxLength="512" id="username-field" placeholder="Username"/>
+		<br>
+		<input name="password" type="password" maxlength="25" id="password-field" placeholder="Password"/>
+		<br>
+		<div class="register">
+			<input class="both" name="passwordConfirm" type="password" maxlength="25" id="password-confirm-field" placeholder="Confirm Password"></input>
+			<br>
+			<div class="action-button register" id="register-button">Sign Up</div>
+		</div>
+		<div class="login">
+			<div class="action-button login" id="login-button">Sign Up</div>
+		</div>
+	</div>
+	<br>
+	<div id="login-switcher" class="switcher register">I already have an account.</div>
+	<div id="register-switcher" class="switcher login">Join Vuescape</div>
+	<br>
+	<div id='logout-button'>Logout Button</div>
+</div>
+<br>
+<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
+<br>
+
+<div id="accountInfo"></div>
+
+<script src="js/userMgmt.js"></script>
+</body>
+</html>

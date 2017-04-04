@@ -1,0 +1,158 @@
+@charset "UTF-8";
+/*$otherFont:
+font-family: 'Open Sans', Helvetica, 'Microsoft YaHei New', 'Microsoft Yahei', 微软雅黑, 宋体, SimSun, STXihei, 华文细黑, sans-serif;
+font-size: 48px;
+font-stretch: normal;
+font-style: normal;
+font-variant: normal;
+font-weight: 800;
+*/
+html, body {
+  margin: 0;
+  height: 100%;
+  font-family: "Ubuntu", sans-serif; }
+
+body {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  text-align: center;
+  background: #0A0A0A url("../img/theater.jpg") no-repeat fixed center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
+
+h1 {
+  color: #5C6BC0; }
+
+.main-container {
+  display: inline-block;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  padding: 2% 2% 2% 2%;
+  background-color: rgba(200, 200, 200, 0.8);
+  text-align: center;
+  -webkit-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.5);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px; }
+  .main-container .social {
+    font-family: 'Roboto', sans-serif;
+    display: inline-block;
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px; }
+    .main-container .social .social-btn-wrapper {
+      margin-top: 5px;
+      margin-bottom: 5px; }
+  .main-container .normal-vuescape {
+    display: inline-block;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px; }
+    .main-container .normal-vuescape input {
+      display: inline-block;
+      width: 100%;
+      font-size: 1.2em;
+      padding: 3px 3px 3px 3px; }
+  .main-container .switcher {
+    display: inline-block;
+    color: white;
+    border-bottom: 2px solid #00C488;
+    cursor: pointer;
+    width: auto; }
+    .main-container .switcher:hover {
+      -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2); }
+  .main-container .action-button {
+    background-color: #00C488;
+    cursor: pointer;
+    display: inline-block;
+    width: 100%;
+    font-size: 1.2em;
+    padding: 3px 3px 3px 3px;
+    color: white; }
+
+.is-removed {
+  display: none !important;
+  opacity: 0; }
+
+/***************************
+ ----- or ------
+ ***************************/
+.or-divider-wrapper {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  color: #464646; }
+  .or-divider-wrapper .or-divider {
+    display: inline-block;
+    width: 30%;
+    border-bottom: 2px solid #787878;
+    margin: .25em 5% .25em 5%; }
+
+/****************************
+ * Google Custom Login Button
+ ****************************/
+#google-login-button {
+  display: inline-block;
+  background: #4285f4;
+  color: white;
+  width: 190px;
+  border-radius: 5px;
+  white-space: nowrap; }
+  #google-login-button:hover {
+    cursor: pointer; }
+
+span.label {
+  font-weight: bold; }
+
+span.icon {
+  background: url("/identity/sign-in/g-normal.png") transparent 5px 50% no-repeat;
+  display: inline-block;
+  vertical-align: middle;
+  width: 42px;
+  height: 42px;
+  border-right: #2265d4 1px solid; }
+
+span.buttonText {
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 42px;
+  padding-right: 42px;
+  font-size: 14px;
+  font-weight: bold;
+  /* Use the Roboto font that is loaded in the <head> */
+  font-family: 'Roboto', sans-serif; }
+
+@media (max-width: 991px) {
+  .desktop-only {
+    display: none !important; } }
+/** 
+ * iPad with portrait orientation.
+ */
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation: portrait) {
+  .foo {
+    height: 1024px; } }
+/** 
+ * iPad with landscape orientation.
+ */
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation: landscape) {
+  .foo {
+    height: 768px; } }
+/**
+ * iPhone 5
+ * You can also target devices with aspect ratio.
+ */
+@media screen and (device-aspect-ratio: 40 / 71) {
+  .foo {
+    height: 500px; } }
+
+/*# sourceMappingURL=UserMgmt.css.map */

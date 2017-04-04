@@ -1,0 +1,89 @@
+userDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED
+
+webserver:
+  webRoot: /webroot
+
+
+#category database
+categoryDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED
+
+#database of cookies used by players
+cookieDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED
+
+#database of players connected to this load balancer
+playerDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED
+  
+#database containing content data
+contentDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED
+
+#metadata database
+metadataDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED 
+
+#used for connecting to various other web services
+jerseyClient:
+  minThreads: 1
+  maxThreads: 128
+  workQueueSize: 8
+  gzipEnabled: false
+  gzipEnabledForRequests: false
+  chunkedEncodingEnabled: false
+
+server:
+  type: simple
+  applicationContextPath: /
+  connector:
+    type: http
+    port: 9000
+  adminContextPath: /admin
+  
+
+   
+
+
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: ALL
+
+  # Logger-specific levels.
+  loggers:
+
+    # Sets the level for 'com.apmasphere.billproto' to DEBUG.
+    com.apmasphere.billproto: DEBUG
+
+    org.hibernate.SQL: ALL
+
+  appenders:
+    - type: console
+ 

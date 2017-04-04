@@ -1,0 +1,196 @@
+#database containing content 
+contentDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED
+
+#database containing user information
+userDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED
+
+CDNSettings:
+  thisHost: REDACTED
+  cdnHostIp: REDACTED
+  port: REDACTED
+  registrationPath: /api/v0/cdn/addupdateedge
+  deletionPath: notused
+  protocol: https://
+
+#metadata database
+metadataDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED
+  
+#database of cookies used by players
+cookieDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED
+
+#database of players connected to this load balancer
+playerDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED
+
+#database of edge cloud instances used/in use by this load balancer
+edgeDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED
+
+backendDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED
+  
+#Common connection information for all cloud video players
+cloudConnections:
+  port: REDACTED
+  setContentPath: /api/v0/setcontent
+  addPlayerPath: /api/v0/addplayer
+  deletePlayerPath: /api/v0/deleteplayer
+  setLiveContentPath: /api/v0/setcontent/live
+  
+#General load balancer settings
+loadBalSettings:
+  cloudPrefetchDelay: 3500
+
+#Cloud provider information
+#will likely vary from provider to provider
+providerInfo:
+  apiKey: REDACTED
+
+#Httpclient information
+#provided in case the low level cloud manager interface needs to use this
+httpClient:
+  timeout: 100000ms
+  connectionTimeout: 100000ms
+  timeToLive: 1h
+  cookiesEnabled: false
+  maxConnections: 1024
+  maxConnectionsPerRoute: 1024
+  keepAlive: 0ms
+  retries: 0
+  userAgent: portol (HttpClient)
+  
+#Ready queue options
+readyQ:
+  initialSize: 1 
+
+#address of toshi node to use for address checking
+addrBalanceChecker:
+  host: REDACTED
+  port: REDACTED
+  jsonpath: /api/v0/addresses/
+  confBalCheckPath:
+  unConfBalCheckPath:
+  user:
+  password:
+
+#used for connecting to various other web services
+jerseyClient:
+  timeout: 100000ms
+  connectionTimeout: 100000ms
+  minThreads: 1
+  maxThreads: 128
+  workQueueSize: 8
+  gzipEnabled: false
+  gzipEnabledForRequests: false
+  chunkedEncodingEnabled: false
+
+#BTC address server connection details
+#use to get new addresses to assign to players
+paymentServer:
+  host: REDACTED
+  port: REDACTED
+  path: /api/v0/payment/newpayment
+  apiKey: foo
+
+QRServer:
+  bipPaymentServerHost: REDACTED
+  bipPaymentServerprotocol: https://
+  bipProtocol: bitcoin
+  port: 1
+  QRmakerPort: 30303
+  QRmakerURL: 127.0.0.1
+  QRmakerProtocol: http://
+  apiKey: foo
+  path: /api/v0/qr/qrmake
+  
+server:
+  adminMinThreads: 1
+  adminMaxThreads: 64
+  adminContextPath: /
+  applicationContextPath: /
+  applicationConnectors:
+    - type: http
+      port: 8081
+    - type: https
+      port: 8443
+      keyStorePath: REDACTED
+      keyStorePassword: REDACTED
+      validateCerts: false
+  adminConnectors:
+    - type: http
+      port: 8082
+    - type: https
+      port: 8444
+      keyStorePath: REDACTED
+      keyStorePassword: REDACTED
+      validateCerts: false
+
+
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: ALL
+
+  # Logger-specific levels.
+  loggers:
+#    "org.apache.http.wire": ALL
+    # Sets the level for 'com.apmasphere.billproto' to DEBUG.
+    com.apmasphere.billproto: DEBUG
+
+    org.hibernate.SQL: ALL
+    
+
+    edgeLogger: 
+      level: DEBUG
+#      appenders: 
+#        - type: file
+#          # The file to which current statements will be logged.
+#          currentLogFilename: edge.log
+
+          # When the log file rotates, the archived log will be renamed to this and gzipped. The
+          # %d is replaced with the previous day (yyyy-MM-dd). Custom rolling windows can be created
+          # by passing a SimpleDateFormat-compatible format as an argument: "%d{yyyy-MM-dd-hh}".
+#          archivedLogFilenamePattern: edge-%d.log.gz
+
+          # The number of archived files to keep.
+#          archivedFileCount: 5
+
+          # The timezone used to format dates. HINT: USE THE DEFAULT, UTC.
+#          timeZone: UTC
+#          logFormat: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{16} - %msg%n"
+  
+  appenders:
+    - type: console

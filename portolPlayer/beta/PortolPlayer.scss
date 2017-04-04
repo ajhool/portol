@@ -1,0 +1,1594 @@
+$primaryColor: #eeffcc;
+$portolToIframe: 100%;
+$pFrameToPortol: 100%;
+//$mainFont: Open Sans, Lucida Grande, Tahoma, Verdana, sans-serif;
+$mainFont: 'Ubuntu', sans-serif;
+
+/*$otherFont:
+font-family: 'Open Sans', Helvetica, 'Microsoft YaHei New', 'Microsoft Yahei', 微软雅黑, 宋体, SimSun, STXihei, 华文细黑, sans-serif;
+font-size: 48px;
+font-stretch: normal;
+font-style: normal;
+font-variant: normal;
+font-weight: 800;
+*/
+
+$zScreenBackdrop: 1;
+$zPanelBackdrop: 2;
+$zPanelInfo: 3;
+$zControlButtons: 4;
+$zLandingPage: 1000;
+
+$controlBarWidth : 20%;
+$controlBarShortWidth: 15vh;
+
+$miniButtonSize: 8%;
+$panelContainerWidth: 100%;
+$panelVisibleWidth: 100%-$controlBarWidth;
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin easy-transition($time){
+ 	-webkit-transition: width $time ease, height $time ease, left $time ease, right $time ease, top $time ease;
+	-moz-transition: width $time ease, height $time ease, left $time ease, right $time ease, top $time ease;
+ 	-o-transition: width $time ease, height $time ease, left $time ease, right $time ease, top $time ease;
+ 	transition: width $time ease, height $time ease, left $time ease, right $time ease, top $time ease;
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+	overflow-x: hidden;
+	overflow-y: hidden;
+	text-align: center;
+	
+	background-color: black;
+}
+
+a:hover, a:visited, a:link, a:active
+{
+	color: white;
+    text-decoration: none;
+}
+
+#portol-player {
+	width: $portolToIframe;
+	height: $portolToIframe;
+	display: inline-block;
+	margin: auto;
+	text-align: center;
+	overflow-x: hidden;
+	overflow-y: auto;
+	background-color: rgb(230,230,240);
+	
+	padding-right: 20px;
+}
+
+#test-logo {
+	color: white;
+	font-family: $mainFont;
+	text-align:center;
+	position:absolute;
+	top: 58%;
+	font-size: 3em;
+	left: 40%;
+}
+
+#test-logo-2{
+	color: white;
+	font-family: $mainFont;
+	text-align:center;
+	position:absolute;
+	top: 72%;
+	font-size: 3em;
+	left: 40%;
+}
+
+.test-logo-acc{
+	color: pink;
+}
+
+.center-wrapper {
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+}
+
+.right-wrapper {
+	display: inline-block;
+	width: 100%;
+	text-align: right;
+}
+
+
+.video-title {
+	&.big {
+		font-weight: 400;
+		font-size: 2em;
+		letter-spacing: 1px;
+	}
+}
+
+.creator-name {
+	&.big {
+		font-weight: 200;
+		font-size: 1.5em;
+		letter-spacing: 1px;
+	}
+}
+
+
+#theme-backdrop {
+	width: 100% !important;
+	height: auto !important;
+	//height: 100%;
+	display:inline-block;
+	
+	z-index: $zScreenBackdrop;
+	
+	&.fixed-backdrop{
+		position:absolute;
+		top: 0;
+		left: 0;
+	}
+	
+	&.dimming-gradient {	 	
+	 	 -webkit-transition: opacity 10s ease;
+		-moz-transition: opacity 10s ease;
+ 		-o-transition: opacity 10s ease;
+ 		transition: opacity 10s ease;
+ 		
+	 	opacity: 0;
+	}
+}
+
+/*
+#dark-backdrop {
+	position: absolute;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+	
+ 	width: 100% !important;
+	height: auto !important;
+	
+	-webkit-transition: opacity 10s ease;
+	-moz-transition: opacity 10s ease;
+ 	-o-transition: opacity 10s ease;
+ 	transition: opacity 10s ease;
+ 	
+	&.no-filter {
+		display: none;
+	}
+	
+	&.dimming-filter {
+		display: inline-block;		
+	 	opacity: 100%;
+	}
+	
+}
+*/
+
+.hide-mouse {
+	cursor: none;
+}
+
+#landing-page {
+	display: block;
+	height: $portolToIframe;
+	width: $portolToIframe;
+	//background-color: #3F51B5;
+	//background-color: #576bff;
+	$leftStop: #00C488;
+	$rightStop: #576BFF;
+
+	z-index: $zLandingPage;
+	background: -webkit-linear-gradient(right, $leftStop , $rightStop); /* For Safari 5.1 to 6.0 */
+  	background: -o-linear-gradient(right, $leftStop, $rightStop); /* For Opera 11.1 to 12.0 */
+  	background: -moz-linear-gradient(right, $leftStop, $rightStop); /* For Firefox 3.6 to 15 */
+  	background: linear-gradient(to right, $leftStop , $rightStop); /* Standard syntax */
+}
+
+.port-FP-uninitialized {
+	display:none;
+}
+
+#splash-container {
+	width: 100%;
+	//display: inline-block;
+	display: none;
+	text-align: center;
+	//height: this.parentElement.offsetHeight - this.controlBarHeight + 'px';
+	display: inline-block;
+	text-align: center;
+	repeat: no-repeat;
+   	-webkit-background-size: cover;
+   	-moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+/*******************************
+ * Panels
+ *******************************/
+ #panels-container {
+	position: absolute;
+	z-index: $zScreenBackdrop;
+	width: 100%;
+	height: 100%;
+	bottom: 0px;
+	text-align: left;
+	display: block;
+	left: 0px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-right: 20px;
+}
+
+#back-to-program {
+	z-index: $zPanelBackdrop + 1;
+	//width: $panelVisibleWidth;
+	width: $panelContainerWidth;
+	font-size: 2em;
+	color: white;
+	font-family: $mainFont;
+	//background-color: #3F51B5;
+	//background-color: #9FA8DA;
+	//background-color: #4CAF50;
+	
+	padding-top: 15px;
+	padding-bottom: 15px;
+
+	-webkit-box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
+ 	-moz-box-shadow: 00px 0px 10px 5px rgba(0,0,0,0.5);
+ 	box-shadow: 00px 0px 10px 5px rgba(0,0,0,0.5);
+
+	&:hover {
+		background-color: #5C6BC0;	
+		cursor: pointer;
+	}
+	
+	&.hidden-bar {
+		display:inline-block;
+		position: absolute;
+		top: 200%;
+	}
+	
+	&.available-bar {
+		display: inline-block;
+		position:fixed;
+		top: 0;
+		left: 0;
+	}
+}
+
+
+/******************************************************
+	Panel Modules
+*******************************************************/
+.attention-blue {
+		background-color: #4285f4;
+}
+
+.iframe-sign-up {
+	display:inline-block;
+	margin: 0 0 0 0;
+	width: auto;
+	padding: 5px 5px 5px 5px;
+	z-index: 11;
+	
+	$spriteHeight: 20px;
+
+	& .social-sprite-wrapper {
+		overflow: hidden;
+		height: $spriteHeight;
+		width: auto;
+		
+		& .social-sprite {
+			position: relative;
+			top: 0;
+			height: $spriteHeight*2;
+			width: auto;
+		}
+	}
+	
+	&:hover{
+		& .social-sprite-wrapper {
+			& .social-sprite {
+				position: relative;
+				top: -$spriteHeight;
+			}
+		}
+	}	
+}
+
+#player-container {
+	width: 100%;
+	//top: 0;
+	text-align: center;
+	border-bottom: none;
+	background-color: none;
+	
+	& #quick-buy {
+		display: inline-block;
+		//position: absolute;
+		color: rgb(210,210,210);
+		font-family: $mainFont;
+		background: rgba(10,10,10,.5);
+		padding: 2px 2px 2px 2px;
+		opacity: 1;
+		z-index: 3;
+		//top: 0;
+		//left: 0;
+		opacity: 1;
+		text-align: left;
+	/*
+		&.is-visible{
+			display: inline-block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity: 1;
+			
+			@include easy-transition(.100s);
+		}
+	*/
+		&.is-hidden {
+			display: none;
+			opacity: 0;
+			@include easy-transition(.100s);
+		}
+		
+		&.is-removed {
+			display: none;
+			opacity: 0;
+		}
+		
+		& .cents {
+			//color: #00C488;
+		}
+		
+		& .buy-now-button {
+			display: inline-block;
+			width:auto;
+			margin: 0 0 0 0;
+			padding: 2px 2px 2px 2px;
+			cursor: pointer;
+									
+			&:hover {
+				cursor: pointer;
+				background-color: #5396f4;
+				color: white;
+			}
+			
+		}
+	}
+	
+	& .info-box {
+		position: absolute;
+		left: 0;
+		top: 0;
+		font-family: $mainFont;
+		color: white;
+		size: 1.2em;
+		text-align: left;
+		padding-left: 10px;
+		padding-top: 5px;
+		
+		&.is-removed {
+			 @include easy-transition(0.100s);
+			 display: none;
+		}
+	}
+	
+	& #pay-wall{
+		position: absolute;
+		width: 100%;
+		height: 95%;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		
+		font-family: $mainFont;
+		color: white;
+		text-align: left;
+		z-index: 1;
+		
+		&.is-removed {
+			 @include easy-transition(0.100s);
+			 display: none;
+		}
+		
+		& .show-after-freeview {
+			@include easy-transition(0.100s);
+		}
+		
+		& .show-before-freeview {
+			@include easy-transition(0.100s);
+			
+			& .stages {
+				display: inline-block;
+				height: 80%;
+				overflow: scroll;
+			}
+			& .stage-wrapper {
+				display: inline-block;
+				width: 100%;
+				height: 30%;
+			}
+			
+			& .stage {
+				display: inline-block; 
+				width: 100%;
+				height: 100%;
+				
+				&.is-removed {
+					display: hidden !important;
+				}
+			}
+			
+			& #stage-0 {
+				background-color: #00C488;
+			}
+			& #stage-1 {
+				background-color: #4285f4;
+			}
+			& #stage-2 {
+				background-color: rgba(255, 64, 129, .95);
+			}
+			
+			& .facade {
+				display: inline-block;
+				
+				& .is-removed {
+					display: hidden !important;
+				}
+			}
+		}
+		
+		& .left-bar {
+			display: inline-block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 50%;
+			height: 90%;
+			padding: 10px 10px 10px 10px;
+			background: rgba(20,20,20,.7);
+			
+			opacity: 1;
+			
+			& .fill {
+				display: inline-block;
+				height: 100%;
+				width: 100%;
+			}
+			
+		}
+		
+		& .remove-for-play {
+		}
+		
+		& .got-it-button {
+			z-index: 5;
+			display: inline-block;
+			width: auto;
+			//@include border-radius(10px);
+			background-color: rgba(0,0,0,.4);
+			border-bottom: 2px solid #00C488;
+			padding: 5px 3px 5px 3px;
+			cursor: pointer;
+		}
+					
+		& .preview-message{
+			display: inline-block;
+			position: absolute;
+			width: 100%;
+			cursor: pointer;
+			color: white;
+			font-family: $mainFont;
+			text-align: left;
+			
+			& .buy-now-button {
+				display: inline-block;
+				width:auto;
+				margin: 0 0 0 0;
+				padding: 5px 5px 5px 5px;
+				z-index: 10;
+		
+				&:hover {
+					cursor: pointer;
+					background-color: #4285f4;
+					color: white;
+				}
+			}
+		}
+		
+	& .full-height {
+		height: 100%;
+	}
+	& .low-message {
+			position:absolute;
+			bottom: 0;
+	}	
+	& .is-removed {
+		display: none !important;
+		opacity: 0;
+		@include easy-transition(0.100s);
+	}
+
+	
+	}
+	
+}
+
+#video-info-panel {
+	text-align: left;
+	overflow: hidden;
+	background-color: none;
+}
+
+#pairing-panel {
+	//top: 200%;
+	padding-left: 2%;
+	text-align: left;
+	//background-color: rgb(0,185,127);
+	//background-color: #81C784;
+	///background-color:  #F44336;
+	background-color: none;
+	//background-color: #7986CB;
+	//background-color: #F44336;
+	border-top: 2px solid white;
+	
+	& h1 {
+		padding-top: 3%;
+		padding-right: 2%;
+		color: white;
+		font-family: $mainFont;
+		width: $panelVisibleWidth;
+	}
+	
+	& .is-removed {
+		display: none;
+		opacity: 0;
+	}
+}
+
+#account-panel {
+	//top:300%;
+	padding-left: 2%;
+	text-align: left;
+	
+	border-top: 2px solid white;
+	
+	background-color: #00FCAE;
+	
+	& .is-removed {
+		display: none;
+		opacity: 0;
+	}
+}
+
+#portol-panel {
+	//top: 400%;
+	text-align:center;
+	
+	background-color: #7986CB;
+}
+
+
+#pdash-player {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;	
+}
+
+#panel-controllers {
+ display: none;
+ position: absolute;
+ top: 0px;
+ height: 100%;
+ width: 70px;
+ right: 0px;
+ z-index: $zControlButtons;
+}
+
+#shim-gradient {
+	&.underlay {
+		position: absolute;
+		top:0;
+		//bottom:0;
+		left:0;
+		//right:0;
+		z-index: $zPanelBackdrop;
+	}
+	&.dimmed {
+		-webkit-transition: opacity 2s ease;
+		-moz-transition: opacity 2s ease;
+ 		-o-transition: opacity 2s ease;
+ 		transition: opacity 2s ease;
+ 		opacity: 0;
+	}
+}
+
+.frozen {
+	position: absolute;
+	top: 100%;
+}
+
+#splash-gradient {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+	display: inline-block;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+/***************************
+	* Video info container
+****************************/
+#video-title {
+	display: inline-block;
+	border: none;
+	width: 95%;
+	position: relative;
+	font-weight: 600;
+	font-size: 4.2vw;
+	letter-spacing: 1px;
+	color: white;
+	outline: none;
+	font-family: $mainFont;
+	
+	&.active {
+		left: 200px;
+		 @include easy-transition(5s);
+		
+	}
+}
+
+#video-col-1 {
+	display: inline-block;
+	position: relative;
+	top:10%;
+	height: 90%;
+	width: $panelVisibleWidth;
+	padding-left: 1em;
+	z-index: $zPanelInfo;
+
+	overflow: hidden;	
+}
+
+
+#video-description {
+	//display: inline-block;
+	font-family : $mainFont;
+	padding: 0.1em 0.25em;
+	border: none;
+	font-weight: 400;
+	font-size : 3vh;
+	color : white;
+	width: 80%;
+	max-height: 50%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding-right: 20px;
+	//height: 25%;
+	//overflow: scroll;
+ 	//-webkit-overflow-scrolling: touch;
+  	//overflow-y: scroll;
+}
+
+#video-creator {
+	//display: inline-block;
+	font-family : $mainFont;
+	font-weight: 400;
+	font-size : 2.5vw;
+	color : white;
+	padding: 0.2em 0.25em;
+}
+
+#video-discoverer {
+	position: absolute;
+	display: inline-block;
+	font-family: $mainFont;
+	color: white;
+	padding: 0.2em 0.25em;
+	bottom: 1em;
+	text-align:center;
+}
+
+#channel-title {
+	font-family : $mainFont;
+	font-weight: 400;
+	font-size : 1.2em;
+	color : white;
+	position: relative;
+}
+
+#channel-description {
+	font-family : $mainFont;
+	font-weight: 400;
+	font-size : 0.6em;
+	color : white;
+	position: relative;
+}
+
+/***************************
+	* Player Panel
+ ***************************/
+  .highest {
+  	z-index: 1000;
+  }
+  /*
+  #player-options-container {
+  	display: inline-block;
+  	position: relative;
+  	//top: 38%;
+  	//left: 0;
+  	
+  	 &.hidden-container {
+ 		display: none;
+ 	}
+ 	
+	-webkit-box-shadow: 2px 3px 3px 3px rgba(0,0,0,0.5);
+ 	-moz-box-shadow: 2px 3px 3px 3px rgba(0,0,0,0.5);
+ 	box-shadow: 2px 3px 3px 3px rgba(0,0,0,0.5);
+ 	
+ 	z-index: $zControlButtons;
+  }
+  */
+#player-options-container {
+  	display: inline-block;
+  	position: relative;
+  	
+  	&.is-removed {
+  		@include easy-transition(0.100s);
+  		display: none;
+  		opacity: 0;
+  	}
+  	
+  	 &.hidden-container {
+ 		display: none;
+ 	}
+ 	/*
+	-webkit-box-shadow: 2px 3px 3px 3px rgba(0,0,0,0.5);
+ 	-moz-box-shadow: 2px 3px 3px 3px rgba(0,0,0,0.5);
+ 	box-shadow: 2px 3px 3px 3px rgba(0,0,0,0.5);
+ 	*/
+ 	z-index: $zControlButtons;
+  	& #preview-message {
+ 		width: 1.5in;
+ 		height: 2in;
+ 		margin-bottom: .1in;
+ 		cursor: pointer;
+ 		color: white;
+ 		font-family: $mainFont;
+ 		
+ 		@include border-radius(50%);
+ 		
+ 		& #main-play-button {
+ 			width: 100%;
+ 			border: 1px solid #00C488;
+ 			background-color: rgba(0,0,0,.4);
+ 			
+ 			-webkit-box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.2);
+ 			-moz-box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.2);
+ 			box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.2);
+ 			
+ 			@include border-radius(50%);
+ 			
+ 			&:hover{
+ 				background-color: rgba(20, 20, 20, .4);
+ 				
+ 	 			-webkit-box-shadow: 0px 0px 6px 6px rgba(0,0,0,0.2);
+ 				-moz-box-shadow: 0px 0px 6px 6px rgba(0,0,0,0.2);
+ 				box-shadow: 0px 0px 6px 6px rgba(0,0,0,0.2);
+ 			}
+ 		}
+ 		
+ 		& .label {
+			font-size: 2em;
+		}
+ 		
+  	}
+}
+  
+  .player-option-button {
+  	display: inline-block;
+  	font-family: $mainFont;
+  	font-size: 1.25em;
+  	color: white;
+  	padding: 10px 5px 10px 5px;
+  	background-color: rgb(0,185,127);
+  	width: 100%;
+  	
+	-webkit-box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.2);
+	box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.2);
+  	
+  	&:hover {
+ 		cursor: pointer;
+ 		background-color: rgb(0,196,136);
+ 		
+		-webkit-box-shadow: 0px 0px 6px 6px rgba(0,0,0,0.2);
+		-moz-box-shadow: 0px 0px 6px 6px rgba(0,0,0,0.2);
+		box-shadow: 0px 0px 6px 6px rgba(0,0,0,0.2);
+ 	}
+  }
+  
+/***************************
+	* Pairing Panel
+ ***************************/
+/* If we are proud of the qr code, use this:
+#qrcode-img {
+	display: inline-block;
+	height: 80%;
+	
+	-webkit-box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.5);
+ 	-moz-box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.5);
+ 	box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.5);
+}
+*/
+#qrcode-img {
+	display: inline-block;
+	height: 20vw;
+	
+	-webkit-box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.5);
+ 	-moz-box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.5);
+ 	box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.5);
+ 	
+ 	&:hover {
+ 		z-index: $zControlButtons;
+ 		height: 30vw;
+ 		cursor: none;
+ 	}
+ 	
+ 	@include border-radius(30%);
+}
+
+#text-pair-code {
+	display: inline-block;
+	font-family: $mainFont;
+	margin: 10px 5px 10px 5px;
+	padding: 5px 0px 5px 0px;
+	font-size: 5em;
+	color: white;
+	background-color: #FF4081;
+	
+	-webkit-box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.5);
+ 	-moz-box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.5);
+ 	box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.5);
+ 	
+}
+.pair-pink {
+	padding: 2px 2px;
+	background-color: #FF4081;
+	//color: #FF4081;
+	font-weight: bold;
+}
+
+#pairing-methods {
+	display:inline-block;
+	position:absolute;
+	left: $panelVisibleWidth/2 +5%;
+	top: 20%;
+	height: 61%;
+	width: $panelVisibleWidth - 5%;
+	text-align: left;
+}
+
+#pairing-procedure {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	left: 0;
+	z-index: $zPanelBackdrop + 2;
+	//width: $panelVisibleWidth/2 - 5%;
+	width: 20%;
+	font-size: 1.5em;
+	color: white;
+	font-family: $mainFont;
+
+ 	& .main-content {
+ 		position:absolute;
+ 		top: 20%;
+ 		left: 5px;
+ 	}
+}
+
+#fullpage {
+	z-index: $zPanelInfo;
+	
+	&:-webkit-full-screen {
+    	width: 100%;
+    	height: 100%;
+  	}
+  	&:-moz-full-screen {
+    	width: 100%;
+    	height: 100%;
+  	}	
+}
+
+/*****************************************************
+	User Info Panel
+******************************************************/
+  #login-options-container {
+ 	display: inline-block;
+ 	position: relative;
+ 	top:30%;
+ 	left: 5%;
+ 	width: 30%;
+ 	//background: rgba(255,255,255,.2);
+ 	
+ 	 z-index: $zControlButtons;
+
+	-webkit-box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.5);
+ 	-moz-box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.5);
+ 	box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.5);
+
+  	 background-color: rgb(0,185,127);
+
+ 	&.hidden-container {
+ 		display: none;
+ 	}
+  }
+  
+  #user-information {
+  	height: 100%;
+  }
+  
+  #logged-in {
+  	/*
+  	-webkit-box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.5);
+ 	-moz-box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.5);
+ 	box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.5);
+ 	*/
+ 	position: absolute;
+ 	top: 38%;
+ 	
+ 	&.hidden-container {
+  		display: none;
+  	}
+  }
+  
+  #login-options-main {
+  	 background-color: rgb(0,185,127);
+  }
+  
+ .login-option-button {
+ 	display: inline-block;
+ 	width: 100%;
+ 	text-align: center;
+ 	
+ 	//border: 2px solid #00C488;
+ 	//background-color: #00C488;
+ 	
+ 	font-size: 1em;
+ 	color: white;
+ 	font-family: $mainFont;
+ 	
+ 	height: 50px;
+ 	
+ 	//@include border-radius(10px);
+ 	
+ 	//background-color: rgba(63,81,181,1);
+ 	
+ 	&.hidden-button {
+ 		display: none;
+ 	}
+ 	
+ 	&:hover {
+ 		cursor: pointer;
+ 		background-color: rgb(0,196,136);
+ 	}
+ }
+ 
+ .login-option-text {
+ 	display:inline-block;
+ 	width: 100%;
+ 	text-align: left;
+ 	background-color: white;
+ 	
+ 	padding-left: 5px;
+ 	margin: 0px 0px 0px 0px;
+ 	border-bottom: 1px solid rgb(200, 200, 200);
+ 	height: 50px;
+ 	
+ 	font-family: $mainFont;
+ 	
+ 	color: rgba(150,150,150,.8);
+ }
+/**************************
+ * Control Bar
+ **************************/
+
+$numButtons : 6;
+$buttonHeight: percentage(1/ $numButtons);
+
+#control-bar {
+ 	position: fixed;
+ 	top: 0px;
+ 	right: 0px;
+ 	z-index: $zControlButtons;
+ 	
+	cursor: ne-resize;
+ 
+ 	@include easy-transition(0.100s);
+
+	&.opened-drawer {
+		width: $controlBarWidth;
+		height: 100%;
+
+		-webkit-box-shadow: -30px 0px 30px -10px rgba(0,0,0,0.5);
+		-moz-box-shadow: -30px 0px 30px -10px rgba(0,0,0,0.5);
+		box-shadow: -30px 0px 30px -10px rgba(0,0,0,0.5);
+	}
+
+	&.closed-drawer {
+
+		$leftStop: rgba(0,0,60,0);
+		$rightStop: rgba(0,0,0,0.65);
+		
+		height: 50%;
+		
+		width: $controlBarShortWidth;
+		
+		//background: -webkit-linear-gradient(right, $leftStop , $rightStop); /* For Safari 5.1 to 6.0 */
+		//background: -o-linear-gradient(right, $leftStop, $rightStop); /* For Opera 11.1 to 12.0 */
+		//background: -moz-linear-gradient(right, $leftStop, $rightStop); /* For Firefox 3.6 to 15 */
+		//background: linear-gradient(to right, $leftStop , $rightStop); /* Standard syntax */
+		background: none;
+		
+		cursor: w-resize;
+		
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+	}
+
+	&.hidden-drawer {
+		right: -100px !important;
+		width: 0;
+	
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+		
+		& .control-tooltip {
+			display: none;
+		}
+	}
+}
+
+#control-buttons {
+	display:inline-block;
+	width: 100%;
+}
+
+#drawer-controller {
+	position:absolute;
+	top: 0;
+	left: -1.5em;
+	display: inline-block;
+	width: 1.5em;
+	height: 10%;
+	line-height: 10px;
+	
+	background-color: rgba(0,0,0,0);
+}
+
+.splash-button {
+	display: inline-block;
+	background: rgba(63, 81, 181, .90);
+	border-bottom: 1px solid rgba(20,20,20,1);
+	-webkit-background-clip: padding;
+	background-size: cover;
+	background-clip: padding-box;
+	color: white;
+	width:100%;
+	font-family: $mainFont;
+	right: 2px;
+	z-index: $zControlButtons;
+	
+	border-left: 2px solid white;
+
+	line-height: 1.2em;
+	letter-spacing: 1px;
+	outline: none;
+	text-align: center;
+	
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highligh-color: transparent;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+	
+	cursor: pointer;
+	
+	height: $buttonHeight;
+	
+	.control-tooltip {
+		display: none;
+	}
+	
+	&.mini{ 
+		position: absolute;
+		width: 10vh;
+		height: 10vh;
+		right: 7px;
+		left: auto;
+		
+		background: none;
+		border: none;
+		background: rgba(0,0,0,0);
+		height: auto;
+  		@include border-radius(50%);
+		
+		-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.8);
+		-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.8);
+		box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.8);
+		
+		
+		& .control-tooltip {
+				display: inline-block;
+                position: absolute;
+                top: 5vh;
+                color: #fff;
+                background-color: rgba(0,0,0,.5);
+                font-size: 14px;
+                font-family: arial, helvetica, sans-serif;
+                white-space: nowrap;
+                max-width: 220px;
+                overflow: hidden;
+                display: block;
+                opacity: 0;
+                width: 0;
+
+                &.right {
+                    right: 60px;
+                }
+
+                &.left {
+
+                }
+        	}
+		
+		&.mini:hover {
+			width: 11vh;
+			background: rgba(0,0,0,0);
+  			@include border-radius(50%);
+			
+			-webkit-box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.8);
+			-moz-box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.8);
+			box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.8);
+			
+			
+			.control-tooltip {
+                -webkit-transition: opacity 0.2s ease-in;
+               	transition: opacity 0.2s ease-in;
+                width: auto;
+        	    opacity: 1;
+            }
+		}
+		&.mini.active {
+			width: 11vh;
+			background: rgba(0,0,0,0);
+			@include border-radius(50%);
+			
+			-webkit-box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.8);
+			-moz-box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.8);
+			box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.8);
+			
+			.control-tooltip {
+                -webkit-transition: opacity 0.2s ease-in;
+               	transition: opacity 0.2s ease-in;
+                width: auto;
+        	    opacity: 1;
+            }
+			
+		}
+		
+        &:hover {
+        	.fp-tooltip {
+               -webkit-transition: opacity 0.2s ease-in;
+                transition: opacity 0.2s ease-in;
+                width: auto;
+                opacity: 1;
+            }
+        }
+	}
+	
+	&:hover {
+		background: rgba(255, 64, 129, .95);
+		//background: rgba(63, 81, 181, 1);
+		
+		-webkit-box-shadow: -10px 0px 10px -5px rgba(0,0,0,0.8);
+		-moz-box-shadow: -10px 0px 10px -5px rgba(0,0,0,0.8);
+		box-shadow: -10px 0px 10px -5px rgba(8,8,8,0.8);
+		
+		z-index: $zControlButtons + 1;
+	}
+	
+	&.active {
+		background: rgba(255, 64, 129, .95);
+		-webkit-box-shadow: -10px 0px 10px -10px rgba(0,0,0,0.8);
+		-moz-box-shadow: -10px 0px 10px -10px rgba(0,0,0,0.8);
+		box-shadow: -10px 5px 10px -10px rgba(0,0,0,0.8);
+		
+		z-index: $zControlButtons + 1;
+	}
+}
+
+@function calc-normal-button-top($button-index){
+  @return $buttonHeight * $button-index;
+}
+
+@function calc-mini-button-top($button-index){
+  @return (12vh) * $button-index;
+}
+
+.splash-button-focus {
+		background: rgba(255, 64, 129, .95);
+		-webkit-box-shadow: -20px 0px 20px -2px rgba(0,0,0,0.8);
+		-moz-box-shadow: -20px 0px 20px -10px rgba(0,0,0,0.8);
+		box-shadow: -30px 5px 30px -5px rgba(0,0,0,0.8);
+		
+		z-index: $zControlButtons + 2;
+}
+
+.splash-button-label {
+	display:inline-block;
+	text-align: left;
+	color: white;
+	font-family: $mainFont;
+	font-size: 3vw;
+	
+	width: 100%;
+	
+	margin-top: 40%;
+}
+
+/****
+ Divide buttons up with golden ratio
+ ****/
+.golden-split {
+	display: inline-block;
+	height: 100%;
+	
+	&.small {
+		width: 38%;	
+		&.mini{
+			width: 100%;
+			height: 100%;
+			background-color: none;
+	
+			@include border-radius(50%);
+			@include easy-transition(.100s);
+		}
+	}
+	&.big {
+		width: 50%;
+		height: 100%;
+		float: right;
+
+		&.mini{
+			display: none;
+			@include easy-transition(.100s);
+		}
+	}
+	
+}
+/*
+.golden-split-small {
+	width: 38%;
+	text-align: center;
+	margin: auto;
+	
+	&.mini{
+		width: 100%;
+		height: 100%;
+		background-color: none;
+	
+		@include border-radius(50%);
+		@include easy-transition(.100s);
+	}
+}
+
+.golden-split-big {
+	width: 60%;
+	height: 100%;
+	float: right;
+	
+	&.mini{
+		display: none;
+	
+		@include easy-transition(.100s);
+	}
+}
+*/
+//END divide buttons up
+
+.control-icon {
+	display: inline-block;
+ 	border: 2px solid white;
+	background: rgba(20,20,20,.5);
+	position: relative;
+	
+	@include border-radius(50%);
+	
+	-webkit-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+ 	-moz-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+ 	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+ 	
+ 	vertical-align: middle;
+ 	
+ 	&.normal{
+ 		width: 61%;
+		height: auto;
+ 	}
+ 	
+ 	&.mini{
+ 		width: 100%;
+ 		height: 100%;
+ 	}
+ 	
+}
+
+#portol-logo {
+	width: 33%;
+	height: 100%;
+}
+
+#drawer-button {
+	position:relative;
+	display: inline-block;
+	width: 100%;
+	height: 50px;
+	padding-top: 10x;
+	color: white;
+	font-size: 3em;
+	/*
+	&.normal {
+		top: calc-normal-button-top(0);
+		//height: $buttonHeight/2 !important;
+	}
+	
+	&.mini {
+		top: calc-mini-button-top(0);
+		text-align: center;
+		&.mini:hover {
+			
+		}
+	}
+	*/
+}
+
+#watch-button {
+	&.normal {
+		top: calc-normal-button-top(0);
+	}
+	
+	&.mini {
+		top: calc-mini-button-top(0);
+	}
+}
+
+#video-info-button {
+	&.normal {
+		top: calc-normal-button-top(1);
+	}
+	
+	&.mini {
+		top: calc-mini-button-top(1);
+	}
+}
+
+#pairing-button-icon-image {
+
+}
+
+#pairing-button {
+	&.normal {
+		top: calc-normal-button-top(2);
+	}
+
+	&.mini {
+		top: calc-mini-button-top(2);
+	}
+}
+
+#account-button {
+	&.normal {
+		top: calc-normal-button-top(3);
+	}
+	&.mini {
+		top: calc-mini-button-top(3);
+	}
+}
+
+#portol-button {
+	&.normal {
+		top: calc-normal-button-top(5);
+	}
+	&.mini {
+		display: none;
+	}
+}
+
+#portol-logo {
+	width: 33%;
+	height: 100%;
+}
+
+/********************************
+ * RATING BAR
+*********************************/
+
+#rating-bar {
+	unicode-bidi: bidi-override;
+	direction: rtl;
+	color: #FBB117;
+}
+
+.rating-star {
+	unicode-bidi: bidi-override;
+	direction: rtl;
+	display: inline-block;
+	position: relative;
+	font-size: 3vw;
+}
+
+.good-star {
+	color: #FBB117;
+}
+
+.bad-star {
+	color: none;
+	border: 1px;
+}
+
+/*******************************************
+  * Video Info Panel
+********************************************/
+#price-scroll {
+	background: transparent;
+	border: 2px solid #00C488;
+	width: 3em;
+	padding: 5px 3px 5px 3px;
+	
+	color: white;
+	font-family: $mainFont;
+	font-size: 1.7em;
+	
+	text-align: center;
+	
+	//margin-left: 1em;
+	@include border-radius(10px);
+}
+
+/******************************************
+  * Account Info Panel
+  *****************************************/
+#user-name {
+	color: white;
+	font-family: $mainFont;
+	font-size: 1.7em;
+}
+
+#user-pic {
+	width: 2in;
+	display: inline-block;
+}
+
+#user-balance {
+	width: 150px;
+	color: white;
+}
+
+/*******************************************
+ Pairing Panel
+******************************************/
+
+#portol-cast-color-icon {
+	display:inline-block;
+	width: 61%;
+	height: 36%;
+	
+	margin-top: 32%;
+
+	-webkit-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+ 	-moz-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+ 	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+	
+	@include border-radius(18px);
+}
+
+/*******************************************
+ Portol Info Panel
+******************************************/
+
+#portol-info-link {
+	color: white;
+	font-size: 3vw;
+}
+
+/**
+ * VH and VW units can cause issues on iOS devices: http://caniuse.com/#feat=viewport-units
+ * 
+ * To overcome this, create media queries that target the width, height, and orientation of iOS devices. 
+ * It isn't optimal, but there is really no other way to solve the problem. In this example, I am fixing 
+ * the height of element `.foo` —which is a full width and height cover image.
+ *
+ * iOS Resolution Quick Reference: http://www.iosres.com/
+ */
+ 
+ .foo {
+    height: 100vh;
+    width: 100vw;
+    background: url(cover.jpg) center center / cover no-repeat;
+ }
+ 
+
+//medium+ screen sizes
+@media (min-width:992px) {
+    .desktop-only {
+        //display:block !important;
+    }
+}
+ 
+//small screen sizes
+@media (max-width: 991px) {
+    .mobile-only {
+        //display:block !important;
+    }
+ 
+    .desktop-only {
+        display:none !important;
+    }
+}
+
+/** 
+ * iPad with portrait orientation.
+ */
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait){
+  .foo {
+    height: 1024px;
+  }
+}
+
+/** 
+ * iPad with landscape orientation.
+ */
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:landscape){
+  .foo {
+    height: 768px;
+  }
+}
+
+/**
+ * iPhone 5
+ * You can also target devices with aspect ratio.
+ */
+@media screen and (device-aspect-ratio: 40/71) {
+  .foo {
+    height: 500px;
+  }
+}

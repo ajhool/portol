@@ -1,0 +1,71 @@
+#database containing master aggregation addresses
+#data:
+#  host: REDACTED
+#  port: REDACTED
+#  db: REDACTED
+#  user: REACTED
+#  password: REDACTED
+
+#used for connecting to 3rd party services if needed
+jerseyClient:
+  timeout: 10000000ms
+  connectionTimeout: 100000000ms
+  minThreads: 1
+  maxThreads: 128
+  workQueueSize: 8
+  gzipEnabled: false
+  gzipEnabledForRequests: false
+  chunkedEncodingEnabled: false
+
+scrubber:
+  javaRelativeDirs:
+    - assets
+  ttlSeconds: 3600
+
+mpdComponents:
+  port: REDACTED
+  timelinePath: /api/v0/component/timeline
+  availabilityPath: /api/v0/component/availabilityStart
+  protocol: http://
+  
+loadbalCommunicator:
+  port: 8443
+  bootPath: /api/v0/cloud/edge/boot
+  keepAlivePath: /api/v0/cloud/edge/keepAlive
+  eventPath: /api/v0/cloud/edge/playerEvent
+  loadbalURL: REDACTED
+  
+server:
+  gzip:
+      enabled: false
+  applicationContextPath: /
+  applicationConnectors:
+    - type: http
+      port: REDACTED
+      outputBufferSize: 128MiB
+      minBufferPoolSize: 4096KiB
+      bufferPoolIncrement: 8192KiB
+      maxBufferPoolSize: 256MiB
+
+  adminContextPath: /admin
+  adminConnectors:
+    - type: http
+      port: REDACTED
+
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, 
+  # TRACE, or ALL.
+  level: ALL
+
+  # Logger-specific levels.
+  loggers:
+
+    # Sets the level for 'com.apmasphere.billproto' to DEBUG.
+    com.apmasphere.billproto: WARN
+
+    org.hibernate.SQL: DEBUG
+
+  appenders:
+    - type: console

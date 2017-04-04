@@ -1,0 +1,101 @@
+@CHARSET "UTF-8";
+html, body {
+    height: 100%;
+    text-align: center;
+}
+
+html {
+	/*From: register, creator, builder */
+    /*display: table;*/
+    margin: auto;
+}
+
+body {
+    /*From: creator*/
+    display:inline-block;
+    /*font-size:.8em;*/
+    /*register,creator: top*/
+    vertical-align: middle;
+    background-color: #72A0C1;
+    font-family: Arial;
+}
+
+h1 {
+	margin: 0 0 0 0;
+	padding-top:0;
+	font-size: 1.5em;
+	font-family: Arial;
+	color: white;
+}
+
+h1.username {
+	display: inline;
+}
+
+h2 {
+	font-size: 1.25em;
+	padding-bottom: .5em;
+	color: white;
+	font-family: Arial;
+}
+
+p {
+	color: white;
+	padding-top: 1em;
+}
+
+.floatingBar {
+	width: 100%;
+	height: 10%;
+	opacity: 10%;
+	position: fixed;
+	left: 0;
+	top:0;
+	background-color: rgb(59, 59, 78);
+}
+
+#mainBody .floatingBar{
+	position: absolute;
+}
+
+#topPadding {
+	height: 10%;
+	margin-top: 2%;
+}
+
+#logoWrap {
+	height:100%;
+	width: 33%;
+	float: left;
+}
+
+#logo {
+	height:100%;
+	width: auto;
+	float:right;
+}
+
+#navBar {
+	height: 100%;
+	float: right;
+	width:33%;
+	text-align:left;
+}
+
+.portal {
+	height:100%;
+	max-height: 35px;
+	width: auto;
+}
+
+.portal-link {
+	height: 100%;
+	max-height: 35px;
+	width: auto;
+}
+
+/*Begin mainPage*/
+
+#controlBar {
+	padding-top: 2em;
+}

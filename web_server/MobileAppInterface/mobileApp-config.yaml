@@ -1,0 +1,84 @@
+#database containing master aggregation addresses
+userDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED
+
+
+#database of players connected to this load balancer
+playerDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED
+  
+#database containing content metadata
+contentDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED
+
+iconSvcConn:
+  iconHost: REDACTED
+  port: 10001
+  newIconPath: /api/v0/icongen/newicon
+
+#splash screen database
+splashDB:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED  
+  
+#Common connection information for all cloud video players
+loadbalCommunicator:
+  port: REDACTED
+  priorityLoadPath: /app/priorityload
+  loadbalURL: REDACTED
+  
+
+#used for connecting to various other web services
+jerseyClient:
+  minThreads: 1
+  maxThreads: 128
+  workQueueSize: 8
+  gzipEnabled: false
+  gzipEnabledForRequests: false
+  chunkedEncodingEnabled: false
+
+server:
+  type: simple
+  applicationContextPath: /
+  adminContextPath: /admin
+  applicationConnectors:
+   - type: http
+      port: 8079
+    - type: https
+      port: 8086
+      keyStorePath: REDACTED
+      keyStorePassword: REDACTED
+      validateCerts: false
+
+
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: ALL
+
+  # Logger-specific levels.
+  loggers:
+
+    # Sets the level for 'com.apmasphere.billproto' to DEBUG.
+    com.apmasphere.billproto: DEBUG
+
+    org.hibernate.SQL: ALL
+
+  appenders:
+    - type: console

@@ -1,0 +1,60 @@
+#database containing master aggregation addresses
+data:
+  user: REDACTED
+  password: REDACTED
+
+#used for connecting to 3rd party services if needed
+jerseyClient:
+  timeout: 100ms
+  connectionTimeout: 100ms
+  minThreads: 1
+  maxThreads: 128
+  workQueueSize: 8
+  gzipEnabled: false
+  gzipEnabledForRequests: false
+  chunkedEncodingEnabled: false
+  
+
+scrubber:
+  ttlSeconds: 3600
+
+loadbalCommunicator:
+  port: REDACTED
+  bootPath: /cloud/boot
+  keepAlivePath: /cloud/keepAlive
+  eventPath: /cloud/playerEvent
+  loadbalURL: REDACTED
+  
+server:
+  gzip:
+      enabled: false
+  applicationContextPath: /
+  applicationConnectors:
+    - type: http
+      port: REDACTED
+      outputBufferSize: 128MiB
+      minBufferPoolSize: 4096KiB
+      bufferPoolIncrement: 8192KiB
+      maxBufferPoolSize: 256MiB
+
+  adminContextPath: /admin
+  adminConnectors:
+    - type: http
+      port: REDACTED
+
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: ALL
+
+  # Logger-specific levels.
+  loggers:
+
+    # Sets the level for 'com.apmasphere.billproto' to DEBUG.
+    com.apmasphere.billproto: DEBUG
+
+    org.hibernate.SQL: ALL
+
+  appenders:
+    - type: console

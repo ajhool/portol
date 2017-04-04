@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Image Grid Effects | Demo 2 | Codrops</title>
+	<meta name="description" content="Effect inspiration for opening an image grid item." />
+	<meta name="keywords" content="image grid, effect, inspiration, css, javascript, animation, masonry" />
+	<meta name="author" content="Codrops" />
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/demo.css" />
+	<link rel="stylesheet" type="text/css" href="css/style2.css" />
+	<script src="js/modernizr-custom.js"></script>
+	<script src="js/libs/jquery-1.11.2.js"></script>
+</head>
+<body class="demo-2">
+	<div class="container">
+		<header class="vuescape-header main">
+			<h1>Vuescape <span>Control your media</span></h1>
+		</header>
+		<header class="vuescape-header second">
+			<span>Watch Now | Build a Subscription</span>
+		</header>
+		<div class="content">
+			<div class="grid effect-2">
+				<!--filled in dynamically-->
+			</div>
+			<!-- /grid -->
+			<div class="preview">
+				<button class="action action--close"><i class="fa fa-times"></i><span class="text-hidden">Close</span></button>
+				<div class="description description--preview"></div>
+			</div>
+			<!-- /preview -->
+			<div class="vs-player-wrapper">
+				<div style="display:none;">
+					<iframe></iframe>
+				</div>
+			</div>
+			<!-- /video-player -->
+		</div>
+		<!-- /content -->
+		<!-- Related demos -->
+		<section class="content content--related">
+		</section>
+	</div>
+	<!-- /container -->
+	<script src="js/imagesloaded.pkgd.min.js"></script>
+	<script src="js/masonry.pkgd.min.js"></script>
+	<script src="js/classie.js"></script>
+	<script src="js/main.js"></script>
+	<script>
+	
+		var support = { transitions: Modernizr.csstransitions },
+		// transition end event name
+		transEndEventNames = { 'WebkitTransition': 'webkitTransitionEnd', 'MozTransition': 'transitionend', 'OTransition': 'oTransitionEnd', 'msTransition': 'MSTransitionEnd', 'transition': 'transitionend' },
+		transEndEventName = transEndEventNames[ Modernizr.prefixed( 'transition' ) ],
+		onEndTransition = function( el, callback ) {
+			var onEndCallbackFn = function( ev ) {
+				if( support.transitions ) {
+					if( ev.target != this ) return;
+					this.removeEventListener( transEndEventName, onEndCallbackFn );
+				}
+				if( callback && typeof callback === 'function' ) { callback.call(this); }
+			};
+			if( support.transitions ) {
+				el.addEventListener( transEndEventName, onEndCallbackFn );
+			}
+			else {
+				onEndCallbackFn();
+			}
+		};
+	
+		var getNext = function(attrs){
+			var dataSize ='1280x857';
+			var splashURL = attrs.splashURL || '';
+			var prices = attrs.prices || {
+				priceInCents: 1000,
+				priceInBits: 1000,
+				shardPrice: 1000,
+			};
+			var currentTitle = attrs.currentTitle || 'Current Title';
+			var info = attrs.info || 'No description for this movie -- probably worth the money, though.';
+			var creatorInfo = attrs.creatorInfo || '';
+			var parentContentKey = attrs.parentContentKey || '';
+			var gridElement = '<div class="grid__item" data-size=' + dataSize + '>' +
+						'<a href="' + splashURL + '" class="img-wrap"><img src="' + splashURL + '" alt='+ currentTitle + '" />' +
+							'<div class="embed-code" style="display:none">'+parentContentKey+'</div>' +
+							'<div class="description description--grid">' +
+								'<h3>'+currentTitle+'</h3>' +
+								'<p>'+info+'</p>' +
+								'<p>'+creatorInfo+'</p>' +
+								'<div class="freeview-info-wrapper">' +
+									'<span class="preview-button">Freeview</span>' +
+								'</div>' +
+								'<div class="details">' +
+									'<ul>' +
+										'<li><i class="icon icon-camera"></i><span>$'+prices.priceInCents/100+'</span></li>' +
+										'<li><i class="icon icon-focal_length"></i><span>22.5mm</span></li>' +
+										'<li><i class="icon icon-aperture"></i><span>&fnof;/5.6</span></li>' +
+										'<li><i class="icon icon-exposure_time"></i><span>1/1000</span></li>' +
+										'<li><i class="icon icon-iso"></i><span>80</span></li>' +
+									'</ul>' +
+								'</div>' +
+							'</div>' +
+						'</a>' +
+					'</div>';
+			$('.grid').prepend(gridElement);
+		};
+		
+		var grid_render = function() {
+			new GridFx(document.querySelector('.grid'), {
+				imgPosition : {
+					x : -0.5,
+					y : 1
+				},
+				onOpenItem : function(instance, item) {
+					instance.items.forEach(function(el) {
+						if(item != el) {
+							var delay = Math.floor(Math.random() * 50);
+							el.style.WebkitTransition = 'opacity .5s ' + delay + 'ms cubic-bezier(.7,0,.3,1), -webkit-transform .5s ' + delay + 'ms cubic-bezier(.7,0,.3,1)';
+							el.style.transition = 'opacity .5s ' + delay + 'ms cubic-bezier(.7,0,.3,1), transform .5s ' + delay + 'ms cubic-bezier(.7,0,.3,1)';
+							el.style.WebkitTransform = 'scale3d(0.1,0.1,1)';
+							el.style.transform = 'scale3d(0.1,0.1,1)';
+							el.style.opacity = 0;
+						}
+					});
+				},
+				onCloseItem : function(instance, item) {
+					instance.items.forEach(function(el) {
+						if(item != el) {
+							el.style.WebkitTransition = 'opacity .4s, -webkit-transform .4s';
+							el.style.transition = 'opacity .4s, transform .4s';
+							el.style.WebkitTransform = 'scale3d(1,1,1)';
+							el.style.transform = 'scale3d(1,1,1)';
+							el.style.opacity = 1;
+
+							onEndTransition(el, function() {
+								el.style.transition = 'none';
+								el.style.WebkitTransform = 'none';
+							});
+						}
+					});
+				},
+				//animation
+				minDuration : 0.4,
+				maxDuration : 0.7,
+				viewportFactor : 0.2
+				
+			});
+		};
+		
+		
+		var contentCount = 10;
+		$.ajax({
+			  url: 'https://www.portol.me:5555/api/v0/content/quickpick?num=' + contentCount,
+			  type:"GET",
+			  contentType:"application/json; charset=utf-8",
+			  dataType:"json",
+		  
+			  crossDomain: true,
+			  xhrFields: {
+				withCredentials: true
+			  },
+
+			  error: function(xhr, ajaxOptions, thrownError) {
+				  console.log('errror', xhr, ajaxOptions, thrownError);
+			  },
+		  
+			  success: function(response){
+			  	console.log(response);
+			  	var contentArray = response;
+			  	for(var paddedStats=0;paddedStats<5; paddedStats++){
+					for(var vs_content_counter = 0; vs_content_counter < contentArray.length; vs_content_counter++){
+						getNext(contentArray[vs_content_counter]);
+					};
+				}
+				
+				grid_render();
+			  }
+		});
+	</script>
+</body>
+
+</html>

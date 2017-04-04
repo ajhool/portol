@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<link type="text/css" rel="stylesheet" href="css/main.css"></link>
+		<title>ClipBored</title>
+		
+		
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<link rel="stylesheet" type="text/css" href="css/clipbored.css" />
+
+		<script src="js/jquery-1.11.2.js"></script>
+		<script src="dash.debug.js"></script>
+		<script src="js/snap.svg-min.js"></script>
+		<script src="js/portol.js"></script>
+	</head>
+	<body id="mainBody">
+		<div id="head" class="floatingBar">
+			<span id="logoWrap">
+				<img src="img/cb/misc/title.png" id="logo"/>
+			</span>
+				<!-- JSP if statement using JSTL library (the c tags) -->
+				<!-- current User.name is JSP. It basically compiles to getter method for session variable: currentUser > private variable: name -->
+			<span id="navBar">
+					<img src="img/cb/nav/watch.png" class="portal"/> <!-- css identifies this as the current page -->
+					<a class="portal-link" href="/watchNowController" id="clipbored"><img src="img/cb/nav/clipbored.png" class="portal"/></a>
+					<a class="portal-link" href="/channelExplorer" id="channels"><img src="img/cb/nav/dharma.png" class="portal"/></a>
+					<a class="portal-link" href="/updateChannel" id ="manager"><img src="img/cb/nav/home.png" class="portal"/></a>
+			</span>
+		</div>
+		<div id = "topPadding"></div>
+		<div id="myPlayer" style="width:800px; height: 500px; display: inline-block; position: relative;"></div>
+			<!--Video player in here! -->
+		<script src="js/classie.js"></script>
+		<script src="js/demo.js"></script>
+	</body>	
+</html>

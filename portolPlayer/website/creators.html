@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Vuescape</title>
+	<meta name="author" content="Meteora Labs" />
+	<meta name="description" content="fullPage full-screen apple iphone 5c similar website. Reproducing one sigle scrolling site like Apple iPhone." />
+	<meta name="keywords"  content="fullpage,jquery,demo,screen,fullscreen,apple,iphone5c,iphone5s,iphone,iphone-5c,like,reproduce,similar,how to" />
+	<meta name="Resource-type" content="Document" />
+	<meta name="google-signin-client_id" content="455723277988-mdc4rhk2nitc31slqdrhhgdlv0u6m3vk.apps.googleusercontent.com">
+
+
+	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300' rel='stylesheet' type='text/css'>
+	
+	<link rel="stylesheet" type="text/css" href="css/PortolMain.css"/>
+
+	<!--[if IE]>
+		<script type="text/javascript">
+			 var console = { log: function() {} };
+		</script>
+	<![endif]-->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
+	<!-- This following line is only necessary in the case of using the plugin option `scrollOverflow:true` -->
+	<script type="text/javascript" src="js/libs/jquery.slimscroll.min.js"></script>
+	<script type="text/javascript" src="js/libs/jquery.fullPage.min.js"></script>
+	<!--
+	<script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.2/jquery.fileupload.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.2/jquery.fileupload-process.min.js"></script>
+	-->
+	<script type="text/javascript" src="js/libs/flow.js"></script>
+	<script type="text/javascript" src="js/libs/typed.min.js"></script>
+	<script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+
+	<script type="text/javascript">
+		
+		$(document).ready(function() {
+			$('#fullpage').fullpage({
+				'verticalCentered': false,
+				'css3': true,
+				'sectionsColor': ['none', '#7986CB', '#00C488', '#F44336'],
+				/*
+				'navigation': true,
+				'navigationPosition': 'right',
+				'navigationTooltips': ['Get Started', 'Upload', 'Sell', 'Try it out'],
+				'autoScrolling': true,
+				*/
+				'loopHorizontal': false,
+				//'fitToSectionDelay': 200,
+
+				afterLoad: function(anchorLink, index){
+					if(index == 1){
+						$('video-upload').addClass('active');
+					}
+					$('#infoMenu').toggleClass('whiteLinks', index ==4);
+				},
+
+				onLeave: function(index, newIndex, direction){
+					if (index == 2 && direction == 'down'){
+						$('.section').eq(index -1).removeClass('moveDown').addClass('moveUp');
+					}
+					else if(index == 2 && direction == 'up'){
+						$('.section').eq(index -1).removeClass('moveUp').addClass('moveDown');
+					}
+					/*
+					$('#staticImg').toggleClass('active', (index == 1 && direction == 'down' ) || (index == 4 && direction == 'up'));
+					$('#staticImg').toggleClass('moveDown', newIndex == 4);
+ 					$('#staticImg').toggleClass('moveUp', index == 4 && direction == 'up');
+ 					*/
+				},
+
+				/*
+				Needed to maintain the fixed position of the element
+				due to problems using translate3d and fixed elements.
+				*/
+				afterRender: function(){
+					$('#infoMenu').appendTo('body');
+					
+					$(function(){
+						$(".motivation").typed({
+							stringsElement: $('#motto'),
+							typeSpeed: 10,
+							callback: function(){$(".typed-cursor").addClass('no-cursor');},
+							backspeed: 0,
+							/*
+							backspace: function(curString, curStrPos){
+													setTimeout(function() {
+
+															// check string array position
+															// on the first string, only delete one word
+															// the stopNum actually represents the amount of chars to
+															// keep in the current string. In my case it's 3.
+															self.stopNum = 20;
+													}, 500);//setTimeout
+									 },//backspace
+							*/
+							});//typed
+					});//jquery plugin
+			
+					document.getElementById('login-button').addEventListener('click', function(){
+						$('#section0 .box').toggleClass('available');
+						$('#section0 .box').toggleClass('unavailable');
+					});
+				}
+			});
+			var currentChecksum = null;
+			
+			
+			var generateHash = function(uploadFile){
+				console.log('generateHash', uploadFile);
+				var reader = new FileReader();
+					
+				reader.onload = function(event) {
+					console.log('reader onload');
+					var binary = event.target.result;
+					var mHash = CryptoJS.MD5(binary).toString();
+					currentChecksum = mHash;
+					console.log('generated hash: ', mHash);
+				};
+				reader.readAsBinaryString(uploadFile);
+							
+				return;
+			}
+			
+			var input = document.getElementById('file-1');
+
+			var label = input.nextElementSibling,
+			labelVal = label.innerHTML;
+			
+			if(!window.FileReader){
+				alert('Oh dear, this browser does not support FileReader. Try Google Chrome. If you see this error, it means I forgot to make a better one. Please let me know.');
+			}
+			
+			input.addEventListener( 'change', function( e )
+			{
+				var fileName = '';
+				if( this.files && this.files.length > 1 ) {
+					fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+				} else {
+					fileName = e.target.value.split( '\\' ).pop();
+				}
+				
+				if( fileName ) {
+					label.querySelector( 'span' ).innerHTML = fileName;
+				} else {
+					label.innerHTML = labelVal;
+				}
+				
+				generateHash(e.target.files[0]);
+			});
+
+			// Firefox bug fix
+			input.addEventListener( 'focus', function(){ input.classList.add( 'has-focus' ); });
+			input.addEventListener( 'blur', function(){ input.classList.remove( 'has-focus' ); });
+			
+			
+			/*****************************************
+			 Submitting file upload form.
+			******************************************/
+			
+			var contentInput = document.getElementById('content-title');
+			var contentKey = document.getElementById('embed-tag');
+			
+			var submitBriefMetadata = document.getElementById('submit-brief-meta');
+			
+			var contentTitle = null;
+			var contentKey = null;
+			
+			var contentDestination = "http://www.portol.info:9797api/v0/addcontent/upload/";
+			
+			var doBriefMetadata = function(){
+				var destination = 'http://www.portol.info:9797/api/v0/addcontent/basic';
+				contentKey = document.getElementById('embed-tag').value;
+				contentTitle = document.getElementById('content-title').value;
+				var ownerKey = "Zach";
+				var toSend = {
+						'ownerKey': ownerKey,
+						'contentKey': contentKey,
+						'channelOrVideoTitle': contentTitle,
+						'type': 'VOD'
+					};
+					
+				$.ajax({
+					url: destination,
+					type: 'POST',
+					data: JSON.stringify(toSend),
+	
+					contentType:"application/json; charset=utf-8",
+					dataType:"json",
+	
+					crossDomain: true,
+					xhrFields: {
+						withCredentials: true
+  					},
+	
+					success: function(resp){
+						contentDestination = contentDestination + resp.contentKey;
+					},
+					error: null,
+				});
+			};
+			
+			submitBriefMetadata.addEventListener('click', function(){
+				doBriefMetadata();
+			});
+			/*
+			var flow = new Flow({
+ 				target:'http://www.portol.info:9797/api/v0/addcontent/upload/Aidan', 
+  				query:{checksum:null},
+  				chunkSize: 262144,
+  				forceChunkSize: true,
+  				withCredentials: true,
+  				method: 'octet',
+			});
+			*/
+			var uploaders = [],
+				 upload,
+				 chooseFile;
+			var progressBar = document.getElementById('progress-bar');
+			upload = function (blobOrFile) {
+					var xhr, formData;
+
+					 xhr = new XMLHttpRequest();
+					 //xhr.overrideMimeType('application/octet-stream');
+					 
+					 formData = new FormData();
+					 formData.append('checksum', currentChecksum);
+					 formData.append('mainfile', blobOrFile);
+					 
+					 xhr.open('POST', 'http://www.portol.info:9797/api/v0/addcontent/upload/multipart/' + contentKey, true);
+					 xhr.upload.onprogress = function (e) {
+						 if (e.lengthComputable) {
+						 	var percentComplete = e.loaded / e.total * 100;
+						 	progressBar.style.width = percentComplete + '%';
+						 }
+					 };
+					 
+					 xhr.onloadend = function (e) {
+						 uploaders.pop();
+						 if (!uploaders.length) {
+							 alert('file uploaded');
+						 }
+					 };
+					 
+					 uploaders.push(xhr);
+					 xhr.send(formData);
+				 };
+				 
+			chooseFile = document.getElementById('file-1');
+			var submitVideoUpload = document.getElementById('submit-video-upload');
+
+			submitVideoUpload.addEventListener('click', function(){
+				upload(chooseFile.files[0]);
+			});
+			
+				 /*
+				 chooseFile.addEventListener('change', function (e) {
+					 var self = e.currentTarget,
+						 blob = self.files[0],
+						 BYTES_PER_CHUNK, SIZE, NUM_CHUNKS, start, end;
+		 					 SIZE = blob.size;
+					 NUM_CHUNKS = Math.max(Math.ceil(SIZE / BYTES_PER_CHUNK), 1);
+					 start = 0;
+					 end = BYTES_PER_CHUNK;
+					 while (start < SIZE) {
+						 upload(blob.slice(start, end));
+						 start = end;
+						 end = start + BYTES_PER_CHUNK;
+					 }
+				 }, false);
+			*/
+			/*
+			// Flow.js isn't supported, fall back on a different method
+			if(!flow.support){
+				console.log('no flow support');
+			 //location.href = '/some-old-crappy-uploader';
+			}
+			
+			flow.assignBrowse(document.getElementById('video-browser'));
+			flow.assignDrop(document.getElementById('video-drop'));
+			*/
+			
+			/*
+			flow.on('fileAdded', function(file, event){
+    			generateHash(file.file);
+    			return true;
+			});
+			
+			flow.on('fileSuccess', function(file,message){
+    			console.log(file,message);
+			});
+			flow.on('fileError', function(file, message){
+    			console.log(file, message);
+			});
+			*/
+			var doVideoUpload = function(){
+				//var destination = 'http://www.portol.info:9797api/v0/addcontent/upload/' + contentKey;
+				console.log('actual query', flow);
+				//flow.upload();
+				/*
+				var uploadForm = document.getElementById('video-upload-form');
+				uploadForm.setAttribute('action', destination);
+				console.log(uploadForm);
+				*/
+				/*
+				$('#video-upload').fileupload({
+					'maxChunkSize': 1024,
+					'formData': mFormData,
+					
+					progressall: function (e, data) {
+      		 			var progress = parseInt(data.loaded / data.total * 100, 10);
+        				$('#progress .bar').css(
+            				'width', progress + '%'
+        				);
+        		 	}
+				});
+				*/
+				
+			};
+			
+			var doMetadataSubmit = function(){
+				var info = document.getElementById('content-description').value;
+				var key = document.getElementById('content-key').value;
+				var splashUrl = document.getElementById('splash-url').value;
+				
+				var mContentKey = document.getElementById('embed-tag').value;
+				var mContentTitle = document.getElementById('content-title').value;
+				var mOwnerKey = "Zach";
+				
+				var mMetaData = {
+						'parentContentKey': key,
+						'info': info,
+						'splashURL': splashUrl,
+						'prices': {
+							'priceInCents': 20,
+							'shardPrice': 50,
+							'priceInBits': 3, 
+						},
+						'rating': 5,
+						'ownerKey': mOwnerKey,
+						'contentKey': mContentKey,
+						'channelOrVideoTitle': mContentTitle,
+						'type': 'VOD'
+				};
+				
+				$.ajax({
+					url: 'http://www.portol.info:9797/api/v0/addcontent/metadata/',
+					type: 'POST',
+					data: JSON.stringify(mMetaData),
+	
+					contentType:"application/json; charset=utf-8",
+					dataType:"json",
+	
+					crossDomain: true,
+					xhrFields: {
+						withCredentials: true
+  					},
+	
+					success: null,
+					error: null,
+				});
+			};
+			
+			document.getElementById('submit-metadata').addEventListener('click', function(){
+				doMetadataSubmit();
+			});
+			
+		}); //jquery document ready
+	</script>
+</head>
+<body>
+<!--
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+-->
+<script src="js/inline/InlineAuthScript.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=onVSGoogleLoadHook" async defer></script>
+<script src="js/auth.vuescape.js"></script>
+<script>
+	var vs_authInterface = new VS_AuthInterface();
+	vs_authInterface.start({
+		'ondecision': function(decision){
+			//console.log('User Decision: ' + decision);
+			//},
+				if(decision){
+					var notLoggedInElements = document.getElementsByClassName('not-loggedin');
+					for(var vs_k=0; vs_k < notLoggedInElements.length; vs_k++) {
+						notLoggedInElements[vs_k].classList.add('is-removed');
+					};
+					var isLoggedInElements = document.getElementsByClassName('is-loggedin');
+					for(var vs_j=0; vs_j < isLoggedInElements.length; vs_j++) {
+						isLoggedInElements[vs_j].classList.remove('is-removed');
+					};
+				} else {
+					var isLoggedInElements = document.getElementsByClassName('is-loggedin');
+					for(var vs_k=0; vs_k < isLoggedInElements.length; vs_k++) {
+						isLoggedInElements[vs_k].classList.add('is-removed');
+					};
+					var notLoggedInElements = document.getElementsByClassName('not-loggedin');
+					for(var vs_j=0; vs_j < notLoggedInElements.length; vs_j++) {
+						notLoggedInElements[vs_j].classList.remove('is-removed');
+					};
+				}
+			}
+		});
+</script>
+<div id="fullpage">
+	<!--
+	<div class="section " id="section0" style="background-image: url(http://i.imgur.com/lCJOqD5.jpg);">
+	-->
+	<div class="section" id="section0" style="background-image: url('img/meteora-20.jpg')">
+		<div class="shim-underlay">
+			<div class="welcome-mat">
+				<h1><span style="color: white;">Portol</span></h1>
+				<span class="motivation"><span id="motto"><p>^500Go on,^900 get out there^920!</p></span></span>
+			</div>
+		</div>
+		<div class="action-button-wrap not-loggedin">
+			<span id="login-button" class="action-button">Login</span>
+			<span id="viewer-button" class="action-button"><a href="hello.html">Watch</a></span>
+		</div>
+		<div class="action-button-wrap is-removed">
+			<span class="creator-name"></span>
+		</div>
+		<!--
+		<img src="https://raw.githubusercontent.com/alvarotrigo/fullPage.js/master/examples/imgs/iphone1.jpg" alt="iphone" />
+		-->
+		<div class="wrap">
+			<div class="login-box sign-up available not-loggedin is-removed">
+				<fb:login-button scope="public_profile,email,user_friends" size="xlarge">
+					Continue with Facebook
+				</fb:login-button>
+				<div class="social-btn-wrapper">
+					<div class="g-signin2" data-width="300" data-height="66" data-longtitle="true" data-onsuccess="onGoogleSignIn" data-onfailure="onGoogleFailure">
+					</div>
+				</div>
+				<input class="account-field" type="email" placeholder="Email"></input>
+				<input class="account-field" type="password" placeholder="Password"></input>
+				<input class="account-field" type="text" placeholder="Username"></input>
+				<input class="account-field" type="submit" value="Sign up"></input>
+			</div>
+			<div class="login-box login unavailable">
+				<input class="account-field" type="email" placeholder="Email or Username"></input>
+				<input class="account-field" type="password" placeholder="Password"></input>
+				<input class="account-field" type="submit" value="Login"></input>
+			</div>
+			
+			<div class="content-box">
+				Videos will go here.
+			</div>
+		</div>
+	</div>
+	<div class="section" id="section1">
+		<div class="slide" id="upload-info">
+			<div class="wrap">
+				<div class="box">
+					<h3>Quality matters.</h3>
+					<p>Stream any resolution, including Ultra HD. Viewers see the highest quality possible, depending on their display screen & internet speed.</p>
+					<h3>Just Upload.</h3>
+					<p>Upload your video in any format, and we'll make it compatible for our players. This takes about one hour <em>per hour</em> of video, but only needs to be done once.</p>
+				</div>
+			</div>
+		</div>
+		<div class="slide" id="file-upload-slide">
+			<div class="wrap">
+				 <div class="action-box video-upload left-box">
+				 	<h2>Step 1 - Content ID</h2>
+				 	<ul>
+					<li><p><b>Content Title</b> is just the name of your video.</p></li>
+					<li><p><b>Embed Tag</b> is what we'll use for your video's personal webpage</p></li>
+					</ul>
+					<p>( It's easy to change these later )</p>
+					<input id="content-title" type="text" value="Content Title"></input>
+					<input id="embed-tag" type="text" value="Embed Tag"></input>
+					<input id="submit-brief-meta" type="submit" value="Submit"></input>
+				</div>
+				<div class="action-box right-box">
+					<h2>Step 2 - Content Upload</h2>
+					<ul>
+						<li><p>Video uploading takes a while, so let's get it started.</p></li>
+						<li><p>Upload your highest quality video, up to 4K. We'll take care of compatibility.</p></li>
+					</ul>
+					<!--
+					<form id="video-upload-form" method="post" enctype="multipart/form-data">
+					-->
+						<!--
+  						<input type="file" name="uploadctl" multiple />
+ 						<ul id="fileList">
+  						</ul>
+  						-->
+  						<input type="file" name="file-1[]" id="file-1" data-multiple-caption="{count} files selected" multiple />
+  						<!--
+  						<input id="file-browser" type="file" name="file-1[]" id="file-1" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple />
+						-->
+						<label for="file-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Browse your files&hellip;</span></label>
+						<input id="submit-video-upload" type="submit" value="Start Upload"></input>
+					<!--
+					</form>
+					-->
+					<div id="progress-bar" class="bar"></div>
+				</div>
+			</div>
+		</div>
+		<div class="slide" id="file-info-slide">
+			<div class="wrap">
+				<h2>Step 3 - About your work</h2>
+				<div class="action-box video-upload left-box">
+					<input id="content-key" name="contentKey" type="text" value="Content Key"></input>
+					<input id="content-description" name="info" type="text" value="Description"></input>
+					<input id="splash-url" name="" type="text" value="Splash URL"></input>
+					<input id="submit-metadata" type="submit" value="Submit"></input>			
+				</div>
+				<div class="action-box right-box">
+					<input type="file" name="file-1[]" id="file-1" class="inputfile" data-multiple-caption="{count} files selected" multiple />
+					<label for="file-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Choose a file&hellip;</span></label>
+					<input id="submit-about-content" type="submit" placeholder="Secure Upload"></input>
+				</div>
+			</div>
+		</div>
+		<div class="slide" id="file-pricing-slide">
+			<div class="wrap">
+				<h2>Step 4 - Pricing & Licensing</h2>
+				<div class="action-box video-upload left-box">
+					<input id="content-price" type="text" value="Price"></input>
+				</div>
+				<div class="action-box right-box">
+					<input type="file" name="file-1[]" id="file-1" class="inputfile" data-multiple-caption="{count} files selected" multiple />
+					<label for="file-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Choose a file&hellip;</span></label>
+					<input id="submit-pricing" type="submit" placeholder="Secure Upload"></input>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="section moveDown" id="section2">
+		<div class="slide">
+			<div class="wrap">
+				<div class="box">
+					<h3>Pricing Options</h3>
+					<p>Set your price for a single viewing</p>
+					<p>$$$</p>
+					<h3>Sharing Methods</h3>
+					<p>Basically, you always keep 90% of every transaction. When somebody buys 
+					a single stream of your video, or subscribe to your channel, that's a transaction, 
+					and you get 90%.
+					Meteora keeps 8%. The remaining 2% goes to Meteora's trusted 
+					discovery network yada yada</p>
+				</div>
+				<div class="action-box">
+					<p>90% + 8% + 2% = 100%</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="section moveDown" id="section3">
+		<div class="wrap">
+			<div class="box">
+				<div class="action-box">
+					<!--
+					<iframe width="750px" height="480px" src="http://159.203.91.129/player/beta/PortolPlayer.html" frameborder="0" scrolling="no" allowfullscreen=""></iframe>				
+					-->
+				</div>
+			</div> 
+		</div>
+	</div>
+</div>
+</body>
+</html>

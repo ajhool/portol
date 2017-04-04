@@ -1,0 +1,53 @@
+
+#database containing client addresses
+clients:
+  host: REDACTED
+  port: REDACTED
+  db: REDACTED
+  user: REDACTED
+  password: REDACTED
+
+#used for connecting to 3rd party services if needed
+jerseyClient:
+  minThreads: 1
+  maxThreads: 128
+  workQueueSize: 8
+  gzipEnabled: false
+  gzipEnabledForRequests: false
+  chunkedEncodingEnabled: false
+
+
+#address of toshi node to use for address checking
+addrBalanceChecker:
+  host: REDACTED
+  port: REDACTED
+  confBalCheckPath: REDACTED
+  unConfBalCheckPath: REDACTED
+  user: REDACTED
+  password: REDACTED
+
+
+server:
+  type: simple
+  applicationContextPath: /
+  adminContextPath: /admin
+  connector:
+    type: http
+    port: 9090
+
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+
+  # Logger-specific levels.
+  loggers:
+
+    # Sets the level for 'com.apmasphere.billproto' to DEBUG.
+    com.apmasphere.billproto: DEBUG
+
+    org.hibernate.SQL: ALL
+
+  appenders:
+    - type: console
